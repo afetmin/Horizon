@@ -159,6 +159,26 @@ uv run horizon --hours 48   # 抓取最近 48 小时的内容
 
 Horizon 非常适合作为 **GitHub Actions** 定时任务运行。查看 [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml) 获取现成的工作流配置，可自动生成日报并部署到 GitHub Pages。
 
+### 5. 移动端 Manifest（Flutter 使用）
+
+每次运行后，Horizon 会额外生成 `docs/api/manifest.json` 供移动端读取。
+
+- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`：日报正文
+- `docs/api/manifest.json`：移动端列表/详情使用的索引
+
+建议在工作流环境变量中设置 `HORIZON_PUBLIC_BASE_URL`，确保 manifest 中的 `url` 为完整链接：
+
+```bash
+HORIZON_PUBLIC_BASE_URL=https://<你的-github-pages-域名>
+```
+
+Flutter App 启动示例：
+
+```bash
+cd mobile/horizon_mobile
+flutter run --dart-define=MANIFEST_URL=https://<你的-github-pages-域名>/api/manifest.json
+```
+
 ## 支持的信息源
 
 | 信息源 | 抓取内容 | 评论收集 |

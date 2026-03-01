@@ -1,9 +1,11 @@
 """Main orchestrator coordinating the entire workflow."""
 
 import asyncio
+import os
 import re
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import List, Dict
 from urllib.parse import urlparse
 import httpx
@@ -20,6 +22,7 @@ from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
+from .storage.manifest import build_manifest, write_manifest
 
 
 class HorizonOrchestrator:
@@ -113,8 +116,6 @@ class HorizonOrchestrator:
 
                 # Copy to docs/ for GitHub Pages
                 try:
-                    from pathlib import Path
-
                     post_filename = f"{today}-summary-{lang}.md"
                     posts_dir = Path("docs/_posts")
                     posts_dir.mkdir(parents=True, exist_ok=True)
@@ -146,6 +147,8 @@ class HorizonOrchestrator:
                 except Exception as e:
                     self.console.print(f"[yellow]⚠️  Failed to copy {lang.upper()} summary to docs/: {e}[/yellow]\n")
 
+            # 8. Build mobile-friendly manifest for app clients
+            self._update_mobile_manifest()
             self.console.print("[bold green]✅ Horizon completed successfully![/bold green]")
 
         except Exception as e:
@@ -438,3 +441,15 @@ class HorizonOrchestrator:
         summarizer = DailySummarizer()
 
         return await summarizer.generate_summary(items, date, total_fetched, language=language)
+
+    def _update_mobile_manifest(self) -> None:
+        """Generate docs/api/manifest.json for mobile clients."""
+        try:
+            posts_dir = Path("docs/_posts")
+            output_path = Path("docs/api/manifest.json")
+            base_url = os.getenv("HORIZON_PUBLIC_BASE_URL", "").strip() or None
+            manifest = build_manifest(posts_dir=posts_dir, base_url=base_url)
+            write_manifest(manifest, output_path)
+            self.console.print(f"📱 Saved mobile manifest to: {output_path} ({len(manifest['items'])} items)\n")
+        except Exception as e:
+            self.console.print(f"[yellow]⚠️  Failed to generate mobile manifest: {e}[/yellow]\n")
