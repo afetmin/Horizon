@@ -8,6 +8,8 @@ on:
 jobs:
   daily-summary:
     runs-on: ubuntu-latest
+    env:
+      HORIZON_PUBLIC_BASE_URL: ${{ vars.HORIZON_PUBLIC_BASE_URL }}
     permissions:
       contents: write  # Needed to commit changes
 
