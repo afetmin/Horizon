@@ -148,6 +148,26 @@ The generated report will be saved to `data/summaries/`.
 
 Horizon works great as a **GitHub Actions** cron job. See [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml) for a ready-to-use workflow that generates and deploys your daily briefing to GitHub Pages automatically.
 
+### 5. Mobile Manifest (for Flutter app)
+
+After each run, Horizon also generates `docs/api/manifest.json` for mobile clients.
+
+- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`: Jekyll post content
+- `docs/api/manifest.json`: machine-readable index for app list/detail pages
+
+Set `HORIZON_PUBLIC_BASE_URL` in your workflow environment so manifest URLs are absolute:
+
+```bash
+HORIZON_PUBLIC_BASE_URL=https://<your-github-pages-domain>
+```
+
+Example mobile startup command:
+
+```bash
+cd mobile/horizon_mobile
+flutter run --dart-define=MANIFEST_URL=https://<your-github-pages-domain>/api/manifest.json
+```
+
 ## Supported Sources
 
 | Source | What it fetches | Comments |
