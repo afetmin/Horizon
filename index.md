@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Home
+title: 首页
 ---
 
 # Horizon
 
-Welcome to [Horizon](https://github.com/thysrael/Horizon), an AI-driven information aggregation system.
+欢迎使用 [Horizon](https://github.com/afetmin/Horizon)，这是一个由 AI 驱动的信息聚合与筛选系统。
 
-## Documentation
+## 文档导航
 
-- [Configuration Guide](configuration) — AI providers, information sources, filtering, and environment variable substitution
-- [Source Scrapers](scrapers) — How Horizon collects content from GitHub, Hacker News, RSS, and Reddit
-- [Scoring System](scoring) — AI-based content analysis and the 0-10 scoring scale
+- [配置指南](configuration) — 配置 AI 服务商、信息源、过滤规则与环境变量替换
+- [抓取器说明](scrapers) — 了解 Horizon 如何从 GitHub、Hacker News、RSS 与 Reddit 抓取内容
+- [评分机制](scoring) — 查看 AI 内容分析流程与 0-10 分评分标准
 
 ## 中文速递
 
@@ -23,18 +23,5 @@ Welcome to [Horizon](https://github.com/thysrael/Horizon), an AI-driven informat
     </li>
   {% else %}
     <li><em>暂无内容</em></li>
-  {% endfor %}
-</ul>
-
-## English Digest
-
-<ul>
-  {% assign en_posts = site.posts | where: "lang", "en" %}
-  {% for post in en_posts limit:20 %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.date | date: "%Y-%m-%d" }}</a>
-    </li>
-  {% else %}
-    <li><em>No posts yet</em></li>
   {% endfor %}
 </ul>
