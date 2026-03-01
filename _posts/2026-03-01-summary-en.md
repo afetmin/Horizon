@@ -5,221 +5,198 @@ date: 2026-03-01
 lang: en
 ---
 
-> From 29 items, 16 important content pieces were selected
+> From 29 items, 15 important content pieces were selected
 
 ---
 
-1. [Andrej Karpathy releases MicroGPT: a minimal GPT implementation in ~1000 lines of C code for education](#item-1) ⭐️ 8.0/10
-2. [OpenAI opposes designating Anthropic as a supply chain risk amid Pentagon contract dispute](#item-2) ⭐️ 8.0/10
-3. [Security Expert Urges Developers to Stop Using Passkeys for Data Encryption](#item-3) ⭐️ 8.0/10
-4. [Skeptic Successfully Uses AI Coding Agents to Port scikit-learn to Rust](#item-4) ⭐️ 8.0/10
-5. [QingLong Panel Infected with .fullgc Mining Malware, Spiking CPU Usage to 800%](#item-5) ⭐️ 8.0/10
-6. [Meta abandons advanced AI chip development, shifts $135B capital to hardware investments](#item-6) ⭐️ 8.0/10
-7. [Pentagon Accepts OpenAI's Safety Guidelines for Classified AI Deployment](#item-7) ⭐️ 8.0/10
-8. [Pentagon to ban officers from attending Ivy League and top AI research universities starting 2026-2027](#item-8) ⭐️ 8.0/10
-9. [Research Shows LLMs Suffer Severe Performance Drop in Multi-Turn Conversations, GPT-5 Accuracy Loss Up to 33%](#item-9) ⭐️ 8.0/10
-10. [Obsidian Sync launches headless client for programmatic vault access](#item-10) ⭐️ 7.0/10
-11. [Google's Opaque Gemini API Bans Spark Concerns Over Account Security](#item-11) ⭐️ 7.0/10
-12. [Interactive explanations proposed as a solution to 'cognitive debt' in agentic engineering](#item-12) ⭐️ 7.0/10
-13. [Prototype Unicode Explorer uses HTTP range requests with binary search for efficient data lookup.](#item-13) ⭐️ 7.0/10
+1. [Andrej Karpathy releases microGPT: a minimal, dependency-free GPT implementation in 200 lines of Python.](#item-1) ⭐️ 8.0/10
+2. [OpenAI opposes designating Anthropic as a supply chain risk amid Pentagon contract dispute.](#item-2) ⭐️ 8.0/10
+3. [Skeptic tests AI coding agents through ambitious projects, culminating in scikit-learn Rust port attempt](#item-3) ⭐️ 8.0/10
+4. [QingLong Panel Infected with .fullgc Mining Malware, CPU Usage Spikes to 800%](#item-4) ⭐️ 8.0/10
+5. [Meta abandons advanced in-house AI chip development, shifts $135 billion capital to hardware procurement](#item-5) ⭐️ 8.0/10
+6. [U.S. Department of Defense Accepts OpenAI's Security Guidelines for Classified AI Deployment](#item-6) ⭐️ 8.0/10
+7. [Pentagon to ban officers from attending Ivy League and top AI research universities starting 2026-2027](#item-7) ⭐️ 8.0/10
+8. [Research shows major LLM performance drop in multi-turn conversations, GPT-5 accuracy loss up to 33%](#item-8) ⭐️ 8.0/10
+9. [Obsidian Sync launches headless client for programmatic vault access](#item-9) ⭐️ 7.0/10
+10. [Community Highlights Opaque Bans and Appeal Risks for Google Gemini API Users](#item-10) ⭐️ 7.0/10
+11. [Interactive explanations proposed as a solution to cognitive debt from AI-generated code](#item-11) ⭐️ 7.0/10
+12. [Security Expert Urges Industry to Stop Using Passkeys for Data Encryption](#item-12) ⭐️ 7.0/10
+13. [Prototype Unicode Explorer uses HTTP range requests with binary search for efficient data lookup](#item-13) ⭐️ 7.0/10
 14. [Google Chrome Automatically Downloads 4GB Local AI Model Gemini Nano by Default](#item-14) ⭐️ 7.0/10
-15. [South Korea's Tax Service Exposes Hardware Wallet Seed Phrase, Leading to $4.8M Token Transfer and Return](#item-15) ⭐️ 7.0/10
-16. [Leaked Motorola presentation reveals GrapheneOS partnership, first non-Pixel device possible by 2027](#item-16) ⭐️ 7.0/10
+15. [South Korea's Tax Agency Leaks Hardware Wallet Seed Phrase, Leading to $4.8M Crypto Transfer](#item-15) ⭐️ 7.0/10
 
 ---
 
 <a id="item-1"></a>
-## [Andrej Karpathy releases MicroGPT: a minimal GPT implementation in ~1000 lines of C code for education](http://karpathy.github.io/2026/02/12/microgpt/) ⭐️ 8.0/10
+## [Andrej Karpathy releases microGPT: a minimal, dependency-free GPT implementation in 200 lines of Python.](http://karpathy.github.io/2026/02/12/microgpt/) ⭐️ 8.0/10
 
-AI researcher Andrej Karpathy published MicroGPT, a minimal implementation of the GPT (Generative Pre-trained Transformer) architecture in approximately 1000 lines of C code. The project is explicitly designed for educational purposes to help learners understand transformer fundamentals. This release matters because it provides an accessible, stripped-down reference implementation from a respected authority, lowering the barrier to understanding complex modern AI architectures. It enables developers and students to grasp core transformer concepts without being overwhelmed by the massive codebases of production models. The implementation is praised for its high readability and conciseness, packing core transformer concepts into a minimal codebase. It is a conceptual implementation focused on clarity for learning, and practical questions about its training capabilities on consumer hardware (like a MacBook) remain open for exploration.
+On February 12, 2026, Andrej Karpathy published microGPT, a single-file, 200-line implementation of a Generative Pre-trained Transformer (GPT) model written in pure Python with no external dependencies like PyTorch or NumPy. The codebase is designed as an educational art project that demonstrates core GPT concepts, including training and inference, in a minimal and readable form. This release matters because it demystifies the inner workings of foundational large language models (LLMs) by stripping away complex frameworks, making the core algorithms accessible for learning and experimentation. It serves as a valuable educational resource for students, developers, and researchers seeking to understand GPT architecture from first principles, aligning with Karpathy's broader mission of AI education through his 'Zero to Hero' series and Eureka Labs initiative. The implementation is intentionally minimal, using only Python's standard library and basic math operations to build the autograd engine and neural network components. While elegant for education, its performance is not optimized for production, as execution at this scale is dominated by the interpreter overhead of scalar autograd operations, which is why optimized implementations in languages like Rust or using NumPy/BLAS can be significantly faster.
 
 hackernews · tambourine_man · Mar 1, 01:39
 
-**Background**: The Transformer is a neural network architecture introduced in 2017 that relies on a self-attention mechanism, forming the foundation for modern large language models (LLMs) like GPT, BERT, and T5. GPT (Generative Pre-trained Transformer) is a specific type of Transformer model designed for generative tasks, which is typically pre-trained on vast text corpora. Implementing such models from scratch in a low-level language like C is a challenging but highly educational exercise that reveals the underlying mechanics without the abstraction of high-level frameworks.
+**Background**: GPT (Generative Pre-trained Transformer) is a type of neural network architecture that has become foundational for modern large language models like ChatGPT. Andrej Karpathy is a renowned AI researcher and educator, previously Director of AI at Tesla and a founding member of OpenAI, known for creating highly regarded educational projects like minGPT and nanoGPT, as well as the 'Neural Networks: Zero to Hero' video course. His work often focuses on making complex AI concepts accessible through clean, minimal code implementations.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://www.datacamp.com/tutorial/how-transformers-work">How Transformers Work: A Detailed Exploration of ... - DataCamp</a></li>
-<li><a href="https://dev.to/pranaybathini/the-transformer-architecture-a-deep-dive-into-how-llms-actually-work-4c46">The Transformer Architecture: A Deep Dive into How LLMs ...</a></li>
-<li><a href="https://hackaday.com/2024/04/28/train-a-gpt-2-llm-using-only-pure-c-code/">Train A GPT-2 LLM, Using Only Pure C Code | Hackaday</a></li>
+<li><a href="http://karpathy.github.io/2026/02/12/microgpt/">microgpt - karpathy.github.io</a></li>
+<li><a href="https://dev.to/rsrini7/andrej-karpathys-microgpt-architecture-complete-guide-em8">Andrej Karpathy's microGPT Architecture — Complete Guide</a></li>
+<li><a href="https://karpathy.ai/zero-to-hero.html">Neural Networks: Zero To Hero - Andrej Karpathy</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The community reaction is overwhelmingly positive, praising the code's readability and elegance, with one user describing it as "poetic." There is active engagement, including a port to Rust and work to compile it to WebAssembly for the browser. Some users expressed a desire for even more detailed, line-by-line explanations, while others questioned the practical training potential of such a minimal model.
+**Discussion**: The community response is highly positive and engaged, with developers appreciating the code's elegance and using it as a learning tool. Key discussions include a user porting the code to Rust as a learning exercise, highlighting the challenge of representing the autograd graph in Rust's type system, and another user expressing a desire for a detailed line-by-line code explainer. There is also lighthearted commentary linking it to other minimalist coding 'art'.
 
-**Tags**: `#machine-learning`, `#transformer`, `#educational`, `#C`, `#neural-networks`
+**Tags**: `#machine-learning`, `#gpt`, `#educational`, `#neural-networks`, `#code-walkthrough`
 
 ---
 
 <a id="item-2"></a>
-## [OpenAI opposes designating Anthropic as a supply chain risk amid Pentagon contract dispute](https://twitter.com/OpenAI/status/2027846016423321831) ⭐️ 8.0/10
+## [OpenAI opposes designating Anthropic as a supply chain risk amid Pentagon contract dispute.](https://twitter.com/OpenAI/status/2027846016423321831) ⭐️ 8.0/10
 
-OpenAI publicly stated it does not believe rival AI company Anthropic should be designated as a supply chain risk by the U.S. government, a designation reportedly threatened by the Pentagon after Anthropic refused certain military contract terms. This follows news that OpenAI secured a Department of Defense agreement while Anthropic faced contract termination and potential blacklisting for upholding stricter ethical guardrails. This dispute highlights a critical divergence in how leading AI companies navigate government contracts and ethical boundaries, potentially setting precedents for how 'red lines' are enforced in military AI applications. The outcome could influence future defense procurement, shape regulatory approaches to AI safety, and determine whether contractual promises or technical guardrails are seen as more credible by government agencies. A key distinction noted in the discussion is that Anthropic reportedly seeks to enforce its ethical prohibitions (like no autonomous weapons or mass surveillance) through technical means within its models, whereas OpenAI's agreement with the DoD relies on contractual language and legal compliance. The 'supply chain risk' designation is historically applied to foreign adversaries and would severely limit Anthropic's ability to do business with the U.S. government.
+OpenAI publicly stated it does not believe Anthropic should be designated as a supply chain risk by the Department of Defense, following Defense Secretary Pete Hegseth's decision to apply that label to Anthropic. This comes amid a public dispute where Anthropic refused a Pentagon contract over ethical redlines concerning autonomous weapons and mass surveillance. This public stance from a major AI lab highlights a critical industry split on how to engage with military contracts while upholding ethical principles, potentially influencing future government procurement policies and setting precedents for corporate responsibility in AI development. The designation could severely restrict Anthropic's ability to secure government contracts, impacting its business and the competitive landscape. The supply-chain-risk designation, made under authority 10 USC 3252, typically applies to DoD contracts with suppliers and can restrict a company's federal business. OpenAI's CEO Sam Altman has stated that his company shares Anthropic's core redlines against developing autonomous weapons and conducting mass surveillance, but OpenAI is pursuing a different contractual approach with the Pentagon.
 
 hackernews · golfer · Feb 28, 21:24
 
-**Background**: Anthropic and OpenAI are two leading AI safety and research companies. Both have stated 'red lines' prohibiting the use of their AI for autonomous weapons or domestic mass surveillance. The U.S. Department of Defense has been seeking agreements with AI companies to use their models in classified networks. A 'supply chain risk' designation is a formal government classification that can restrict or prohibit an entity from being part of the federal supply chain, often due to national security concerns.
+**Background**: Anthropic, the creator of the Claude AI model, recently clashed with the Pentagon after refusing a contract due to ethical redlines prohibiting the use of its AI for autonomous weapons and domestic mass surveillance. In response, Defense Secretary Pete Hegseth designated Anthropic as a "supply chain risk," a move that can block a company from receiving Defense Department contracts. Autonomous weapons systems (AWS) are AI-powered systems that can select and engage targets without direct human intervention, raising significant ethical and legal concerns about "meaningful human control."
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://www.npr.org/2026/02/27/nx-s1-5729118/anthropic-pentagon-openai-ai-weapons">OpenAI says it shares Anthropic's 'red lines' over military AI use - NPR</a></li>
-<li><a href="https://www.forbes.com/sites/antoniopequenoiv/2026/02/27/hegseth-designates-anthropic-as-supply-chain-risk-after-trump-bans-government-us/">Hegseth Designates Anthropic As Supply Chain Risk</a></li>
-<li><a href="https://openai.com/index/our-agreement-with-the-department-of-war/">Our agreement with the Department of War - OpenAI</a></li>
+<li><a href="https://www.cbsnews.com/news/hegseth-declares-anthropic-supply-chain-risk/">Hegseth declares Anthropic a supply chain risk, restricting ...</a></li>
+<li><a href="https://www.cnn.com/2026/02/27/tech/openai-has-same-redlines-as-anthropic-in-any-deal-with-the-pentagon">Sam Altman shares Anthropic’s concerns when it comes to working with the Pentagon | CNN Business</a></li>
+<li><a href="https://www.oxford-aiethics.ox.ac.uk/blog/red-herring-meaningful-human-control-and-autonomous-weapons-systems-debate">Red Herring, Meaningful Human Control and the Autonomous ...</a></li>
 
 </ul>
 </details>
 
-**Discussion**: Community sentiment is skeptical of OpenAI's position, with many viewing its DoD agreement as containing legally unenforceable or deceptive language that ultimately allows any 'lawful' use as defined by the government. A prominent viewpoint is that the government is punishing Anthropic for wanting to enforce ethics via technology, while rewarding OpenAI for accepting a contract based on trust and legal interpretation. There is concern that this creates a perverse incentive against building stronger technical safety measures.
+**Discussion**: Community comments reveal skepticism towards OpenAI's approach, with users noting that its contractual language against autonomous weapons merely restates existing law and is therefore seen as a weaker enforcement mechanism compared to Anthropic's proposed technical safeguards. A key viewpoint is that the government is penalizing the company (Anthropic) that sought stronger, technologically-enforced guarantees, while rewarding the one (OpenAI) relying on contractual promises. There is also concern that the DoD's interpretation of "lawful use" can be internally manipulated, rendering such contractual clauses ineffective.
 
-**Tags**: `#AI Ethics`, `#Government Contracts`, `#Corporate Responsibility`, `#Regulation`, `#AI Safety`
+**Tags**: `#AI Ethics`, `#Government Contracts`, `#Corporate Responsibility`, `#Autonomous Weapons`, `#Regulatory Policy`
 
 ---
 
 <a id="item-3"></a>
-## [Security Expert Urges Developers to Stop Using Passkeys for Data Encryption](https://simonwillison.net/2026/Feb/27/passkeys/#atom-everything) ⭐️ 8.0/10
+## [Skeptic tests AI coding agents through ambitious projects, culminating in scikit-learn Rust port attempt](https://simonwillison.net/2026/Feb/27/ai-agent-coding-in-excessive-detail/#atom-everything) ⭐️ 8.0/10
 
-Security expert Tim Cappalli issued a public plea for the identity industry to stop promoting and using passkeys to encrypt user data. He warns that this practice risks permanent, unrecoverable data loss when users inevitably lose their passkeys. This warning highlights a critical misuse of a promising authentication technology that could lead to widespread data loss incidents. If developers continue this pattern, it could undermine user trust in passkeys and cause significant harm when users lose access to encrypted personal information, photos, or documents. The warning specifically addresses the misuse of the WebAuthn Pseudo-Random Function (PRF) extension, which can derive encryption keys from passkeys. A key limitation is that WebAuthn authenticators and passkeys are designed as authentication credentials, not key recovery mechanisms, meaning there's no standard way to recover the private key if the passkey is lost.
+Max Woolf, a self-described AI agent coding skeptic, conducted a detailed evaluation of AI coding agents through progressively complex projects, culminating in an attempt to port Python's scikit-learn machine learning library to Rust. His testing revealed that models like Opus 4.6/Codex 5.3 released around November 2025 showed dramatic improvements, capable of handling complex tasks that would previously have taken months of manual coding. This detailed, skeptical evaluation provides practical evidence of how dramatically AI coding capabilities have advanced, moving beyond hype to demonstrate real-world utility in complex software engineering tasks. The attempt to port a major machine learning library like scikit-learn to Rust represents a particularly ambitious test case that could influence how developers approach large-scale code migration and library development with AI assistance. The evaluation progressed from simple YouTube metadata scrapers to the ambitious rustlearn project, which aims to implement not only standard ML algorithms like logistic regression and k-means clustering but also optimized implementations that could potentially outperform scikit-learn's performance. Woolf noted the frustration of trying to communicate these dramatic improvements without sounding like hype, as the models kept succeeding at tasks designed to challenge them.
 
-rss · Simon Willison · Feb 27, 22:49
+rss · Simon Willison · Feb 27, 20:43
 
-**Background**: Passkeys are a passwordless authentication standard built on WebAuthn that use public-key cryptography for phishing-resistant logins. Unlike passwords, passkeys involve a unique key pair per service, with the private key stored securely on a user's device. The WebAuthn PRF extension allows deriving deterministic encryption keys from this private key, enabling applications to encrypt data. However, the core design assumes the private key remains on the original authenticator and is not meant to be backed up or recovered like a traditional password.
+**Background**: Scikit-learn is a widely-used open-source machine learning library for Python that provides implementations of various classification, regression, and clustering algorithms along with tools for model fitting and data preprocessing. AI coding agents are AI systems designed to assist with or automate software development tasks, with significant improvements reported around November 2025 in models like Opus and Codex. Rust is a systems programming language known for its memory safety and performance characteristics, and creating a Rust crate involves packaging Rust code for distribution and reuse.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://www.corbado.com/blog/passkeys-prf-webauthn">Passkeys & WebAuthn PRF for End-to-End Encryption (2026)</a></li>
-<li><a href="https://bitwarden.com/blog/prf-webauthn-and-its-role-in-passkeys/">PRF WebAuthn and its role in passkeys - Bitwarden</a></li>
-<li><a href="https://developer.apple.com/forums/thread/733413">Passkeys and PRF extension | Apple Developer Forums</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Scikit-learn">scikit-learn - Wikipedia</a></li>
+<li><a href="https://scikit-learn.org/stable/getting_started.html">Getting Started — scikit-learn 1.8.0 documentation</a></li>
+<li><a href="https://medium.com/@nishantspatil0408/mastering-rust-workspaces-from-development-to-production-a57ca9545309">Mastering Rust Workspaces: From Development to Production</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#security`, `#authentication`, `#passkeys`, `#cryptography`, `#usability`
+**Tags**: `#AI Agents`, `#Software Development`, `#Rust`, `#Machine Learning`, `#Code Generation`
 
 ---
 
 <a id="item-4"></a>
-## [Skeptic Successfully Uses AI Coding Agents to Port scikit-learn to Rust](https://simonwillison.net/2026/Feb/27/ai-agent-coding-in-excessive-detail/#atom-everything) ⭐️ 8.0/10
+## [QingLong Panel Infected with .fullgc Mining Malware, CPU Usage Spikes to 800%](https://t.me/zaihuapd/39934) ⭐️ 8.0/10
 
-In February 2026, developer and former skeptic Max Woolf documented a series of increasingly complex projects built using AI coding agents, culminating in the ambitious development of 'rustlearn'—a Rust crate that ports Python's scikit-learn machine learning library. He specifically highlighted that recent model leaps like Opus 4.6 and Codex 5.3 enabled this rapid implementation, performing complex tasks that would have taken months manually. This demonstrates a significant inflection point in AI-assisted programming, where advanced coding agents can now handle large-scale, complex software engineering projects like porting major libraries, potentially accelerating development and lowering barriers to ambitious technical work. It validates the practical utility of recent AI model improvements for professional developers and could reshape expectations for software project timelines and resource requirements. The 'rustlearn' crate aims to implement not only standard algorithms like logistic regression and k-means clustering but also claims performance improvements over scikit-learn's original implementations. The project is described as an 'extreme placeholder name' and is part of a broader trend noted by the author, where models released around November 2025 represented an 'order of magnitude' improvement in coding capability.
+On February 7, 2026, multiple users reported that QingLong Panel, a popular open-source server management tool, was infected with a mining malware named .fullgc, causing server CPU usage to spike abnormally to 800%. The malware achieves persistence by tampering with the config.sh configuration file and can automatically download malicious programs based on the system architecture. This incident highlights a significant security threat to public-facing servers running widely-used automation tools. The attack's sophistication, with persistence mechanisms and architecture-aware payload delivery, indicates a targeted campaign that could lead to substantial financial losses for victims through stolen computing resources and potential data breaches. Security analysis identifies the malware as part of the SusMiner family, which primarily connects to XMR (Monero) mining pools for cryptojacking. The main targets are servers exposed to public IPv4 environments, and users are advised to check for hidden files in the /ql/data/db/ directory. Multiple related cases have been reported on GitHub.
 
-rss · Simon Willison · Feb 27, 20:43
+telegram · zaihuapd · Feb 28, 13:16
 
-**Background**: AI coding agents are autonomous or semi-autonomous tools that use large language models (LLMs) to write, debug, and refactor code based on natural language instructions. Scikit-learn is a foundational, widely-used Python library for machine learning, providing simple and efficient tools for data analysis and modeling. Rust is a systems programming language praised for its performance, memory safety, and concurrency features, making it an attractive target for porting performance-critical libraries like scikit-learn.
+**Background**: QingLong Panel is an open-source, Docker-based tool for managing scheduled tasks and scripts, widely used for automation in server environments. Cryptojacking is a type of cyberattack where malware secretly uses a victim's computing resources to mine cryptocurrency. The SusMiner family refers to a known group of malware specifically designed for unauthorized cryptocurrency mining on compromised systems.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://www.letsdatascience.com/news/developer-builds-rust-ml-library-using-agents-4cee92a2">Developer Builds Rust ML Library Using Agents | Let's Data ...</a></li>
-<li><a href="https://github.com/Menonlab-Rich/rsklearn">GitHub - Menonlab-Rich/rsklearn: A collection of sklearn ...</a></li>
-<li><a href="https://codesamplez.com/productivity/best-ai-coding-agents">Best AI Coding Agents in 2026: The Complete Beginner's Guide</a></li>
+<li><a href="https://github.com/whyour/qinglong/issues/2933">qinglong 面 板 安全漏洞 · Issue #2933 · whyour/ qinglong</a></li>
+<li><a href="https://www.malwarebytes.com/cryptojacking">Cryptojacking – What is it, and how does it work? | Malwarebytes</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#AI Agents`, `#Software Development`, `#Rust`, `#Machine Learning`, `#Automation`
+**Tags**: `#security`, `#malware`, `#cryptojacking`, `#server-security`, `#incident-response`
 
 ---
 
 <a id="item-5"></a>
-## [QingLong Panel Infected with .fullgc Mining Malware, Spiking CPU Usage to 800%](https://t.me/zaihuapd/39934) ⭐️ 8.0/10
+## [Meta abandons advanced in-house AI chip development, shifts $135 billion capital to hardware procurement](https://www.theinformation.com/articles/metas-internal-chip-design-efforts-hit-roadblocks) ⭐️ 8.0/10
 
-On February 7, 2026, multiple users reported that QingLong Panel, a popular open-source task scheduler, was infected with a mining malware named .fullgc, causing abnormal server CPU usage to spike to 800%. The malware achieves persistence by tampering with the config.sh configuration file and can automatically download malicious programs based on the system architecture. This incident highlights a significant security risk for a widely-used automation tool, potentially affecting numerous servers exposed to the public internet. Successful cryptojacking attacks like this steal computational resources, increase operational costs for victims, and can serve as a foothold for more severe intrusions, undermining trust in open-source infrastructure software. Security analysis identifies the malware as part of the SusMiner family, primarily connecting to XMR (Monero) mining pools for illicit cryptocurrency mining. The primary targets are servers with public IPv4 addresses, and users are advised to check for hidden files in the `/ql/data/db/` directory.
-
-telegram · zaihuapd · Feb 28, 13:16
-
-**Background**: QingLong Panel is an open-source, Docker-based timed task management platform. It is widely used for automating scripts, check-ins, crawlers, and notifications. Cryptojacking is a type of cyberattack where a victim's computing resources are hijacked to mine cryptocurrency without their knowledge or consent, often leading to performance degradation and increased energy costs.
-
-<details><summary>References</summary>
-<ul>
-<li><a href="https://github.com/whyour/qinglong">GitHub - whyour/qinglong: 支持 Python3、JavaScript、Shell ... 说明文档 - 青龙面板 Qinglong 青龙面板超详细搭建教程（小白篇）-iQSOO 青龙面板 教程 - cp.baidu.com 青龙面板 | lostmarine的小屋</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Cryptojacking">Cryptojacking - Wikipedia</a></li>
-
-</ul>
-</details>
-
-**Tags**: `#security`, `#malware`, `#cryptojacking`, `#server-security`, `#open-source`
-
----
-
-<a id="item-6"></a>
-## [Meta abandons advanced AI chip development, shifts $135B capital to hardware investments](https://www.theinformation.com/articles/metas-internal-chip-design-efforts-hit-roadblocks) ⭐️ 8.0/10
-
-Meta has scrapped development of its most advanced in-house AI chip, codenamed Olympus, due to technical complexity and manufacturing risks, and will pivot to developing simplified versions instead. The company has also secured a $60 billion deal with AMD for chips and plans capital expenditures of up to $135 billion by 2026, primarily for hardware like chips and servers. This strategic shift highlights the immense difficulty even tech giants face in competing with Nvidia's dominance in AI chip design and underscores the critical importance of securing a reliable, high-performance hardware supply chain for AI development. Meta's massive planned investment signals the escalating capital intensity required to remain competitive in the generative AI race and will significantly impact the semiconductor supply chain, benefiting companies like AMD. The decision was driven by challenges with the MTIA (Meta Training and Inference Accelerator) project, particularly regarding software stability and performance. In addition to the AMD deal, Meta has also signed supply or leasing contracts with Nvidia and Google to secure its AI hardware needs.
+Meta has officially terminated its most advanced in-house AI chip project, codenamed Olympus, due to technical complexity and manufacturing risks, opting instead to develop a simplified version. The company has also secured major procurement deals, including a $60 billion agreement with AMD, and contracts with Nvidia and Google, while planning capital expenditures of up to $135 billion by 2026, primarily for chips and servers. This strategic shift signals a significant setback in Meta's quest for AI hardware independence and highlights the immense technical and financial challenges of competing with established chipmakers like Nvidia. Meta's massive procurement deals and capital expenditure plans will significantly impact the semiconductor supply chain and demonstrate the enormous financial commitment required to compete in the AI infrastructure race. The abandoned Olympus project was part of Meta's MTIA (Meta Training and Inference Accelerator) program. The decision was driven by challenges with software stability and performance within the MTIA project. This follows the earlier abandonment of the second-generation training chip 'Iris' in 2024, which reportedly suffered from high software programming complexity.
 
 telegram · zaihuapd · Feb 28, 23:11
 
-**Background**: The Meta Training and Inference Accelerator (MTIA) is Meta's family of custom-designed chips optimized for its AI workloads, particularly ranking and recommendation inference tasks. Developing cutting-edge AI chips in-house is extremely challenging, involving complex design, software ecosystem integration, and reliance on advanced manufacturing (like TSMC), which carries geopolitical and supply chain risks. Companies like Nvidia currently dominate this market with their highly optimized hardware and mature software stacks (CUDA).
+**Background**: Meta's MTIA is a family of custom Application-Specific Integrated Circuits (ASICs) designed to handle the company's AI workloads, particularly for deep learning recommendation models (DLRMs) used in content feeds and ads ranking. The program started in 2020 with an inference accelerator. Developing in-house AI chips is a strategy pursued by major tech companies to reduce reliance on external suppliers like Nvidia, optimize performance for specific workloads, and potentially control costs, but it involves significant R&D investment and technical risk.
 
 <details><summary>References</summary>
 <ul>
 <li><a href="https://ai.meta.com/blog/next-generation-meta-training-inference-accelerator-AI-MTIA/">Our next generation Meta Training and Inference Accelerator</a></li>
-<li><a href="https://www.theinformation.com/articles/metas-internal-chip-design-efforts-hit-roadblocks">Meta's Internal Chip Design Efforts Hit Roadblocks - The Information</a></li>
-<li><a href="https://engineering.fb.com/2025/09/29/data-infrastructure/metas-infrastructure-evolution-and-the-advent-of-ai/">Meta's Infrastructure Evolution and the Advent of AI</a></li>
+<li><a href="https://encord.com/blog/meta-ai-chip-mtia-explained/">All You Need to Know About Meta’s New AI Chip MTIA</a></li>
+<li><a href="https://www.semicone.com/article-396.html">Meta Abandons In-House AI Chips, Embraces Google TPU</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#AI Hardware`, `#Semiconductors`, `#Meta`, `#Industry Strategy`, `#Supply Chain`
+**Tags**: `#AI Chips`, `#Meta`, `#Semiconductor Industry`, `#Hardware Infrastructure`, `#Capital Expenditure`
+
+---
+
+<a id="item-6"></a>
+## [U.S. Department of Defense Accepts OpenAI's Security Guidelines for Classified AI Deployment](https://t.me/zaihuapd/39939) ⭐️ 8.0/10
+
+The U.S. Department of Defense has preliminarily accepted OpenAI's security 'red lines' for deploying its AI technology in classified environments, according to an Axios report. While no formal contract has been signed, this marks a policy shift, coming after the Pentagon publicly criticized competitor Anthropic's restrictions on mass surveillance and autonomous weapons as 'ideological'. This development is significant because it signals a strategic alignment between a leading AI company and the U.S. military on security protocols, potentially accelerating the adoption of advanced AI in national defense. It highlights a growing divergence in how AI firms engage with government on ethical use, with OpenAI securing a foothold in sensitive military applications where Anthropic has faced resistance. OpenAI CEO Sam Altman stated in a memo that the company's guidelines also prohibit uses for mass surveillance and autonomous weapons, but crucially, they require the company to retain cloud deployment and security monitoring rights. This contrasts with Anthropic's approach, which has led to a public impasse with the government over its refusal to bend its ethical safeguards.
+
+telegram · zaihuapd · Mar 1, 00:28
+
+**Background**: Deploying AI in classified environments (like Top Secret/SCI levels) requires stringent security frameworks to protect sensitive data. A major recent point of contention between AI companies and the U.S. government has been whether companies can impose ethical use restrictions on their technology when used by federal agencies. Anthropic's firm stance against uses in mass surveillance and autonomous weapons has sparked a high-profile dispute with the Trump administration, which has halted the use of Claude AI in federal systems.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://www.npr.org/2026/02/27/nx-s1-5729118/trump-anthropic-pentagon-openai-ai-weapons-ban">Trump bans Anthropic from use in government systems : NPR</a></li>
+<li><a href="https://www.opb.org/article/2026/02/27/anthropic-refuses-to-bend-to-pentagon-on-ai-safeguards-as-dispute-nears-deadline/">Anthropic refuses to bend to Pentagon on AI safeguards as dispute nears ...</a></li>
+<li><a href="https://axis-intelligence.com/enterprise-ai-security-framework-guide-2025/">Enterprise AI Security Framework: Why 85% of... - Axis Intelligence</a></li>
+
+</ul>
+</details>
+
+**Tags**: `#AI Ethics`, `#Military AI`, `#OpenAI`, `#Government Policy`, `#AI Safety`
 
 ---
 
 <a id="item-7"></a>
-## [Pentagon Accepts OpenAI's Safety Guidelines for Classified AI Deployment](https://t.me/zaihuapd/39939) ⭐️ 8.0/10
+## [Pentagon to ban officers from attending Ivy League and top AI research universities starting 2026-2027](https://fortune.com/2026/02/28/pentagon-officer-education-ivy-league-schools-universities-partners-ai-space/) ⭐️ 8.0/10
 
-The U.S. Department of Defense has agreed to OpenAI's safety 'red lines' for deploying AI technology in classified environments, according to Axios. While no formal contract has been signed yet, the Pentagon has preliminarily accepted OpenAI's deployment conditions, which notably prohibit uses like mass surveillance and autonomous weapons. This decision represents a significant shift in military AI procurement, setting a precedent for how leading AI companies collaborate with the U.S. government on national security applications. The contrasting treatment of OpenAI versus competitor Anthropic, whose similar restrictions were previously criticized as 'ideological' by the Pentagon, highlights evolving standards and potential competitive advantages in the defense AI sector. OpenAI CEO Sam Altman stated in a memo that the company's guidelines also prohibit mass surveillance and autonomous weaponry, while requiring the retention of cloud deployment and security monitoring rights. The agreement comes shortly after the Pentagon publicly criticized Anthropic for its restrictions on these same applications.
+U.S. Defense Secretary Pete Hegseth signed a memorandum stating that starting from the 2026-2027 academic year, officers will be prohibited from attending Ivy League schools like Harvard and Yale, as well as other top universities including MIT, with the Pentagon criticizing these institutions as 'factories of anti-American sentiment'. The policy shift will affect multiple senior officer fellowship and professional military education programs, redirecting partnerships toward institutions like Liberty University and George Mason University. This decision could significantly disrupt long-standing defense-academic partnerships in critical technology areas like artificial intelligence and space, potentially slowing the military's access to cutting-edge research and talent from leading institutions. It reflects a broader ideological shift within the U.S. defense establishment that prioritizes perceived cultural alignment over traditional academic prestige, which may reshape the innovation pipeline for military technology. The policy specifically impacts universities that have been key partners for the U.S. Army AI Integration Center (AI2C) and the Space Force, though these military branches have not yet commented on the directive's effect on existing partnerships. The ban extends beyond Ivy League schools to include other top-tier research universities with significant defense contracts and AI research programs.
 
-telegram · zaihuapd · Mar 1, 00:28
+telegram · zaihuapd · Mar 1, 01:03
 
-**Background**: Leading AI companies like OpenAI and Anthropic have established usage policies, often called "safety guidelines" or "red lines," that restrict how their models can be deployed, particularly in sensitive areas like national security. The U.S. Department of Defense has been actively exploring the integration of advanced AI into classified systems for various applications, as seen in pilot programs with other AI models. The negotiation of such guidelines is a critical step before formal contracts are signed, as it defines the ethical and operational boundaries for military use of commercial AI technology.
+**Background**: The U.S. military has long relied on partnerships with elite universities for advanced research, particularly in emerging fields like artificial intelligence. Institutions such as MIT, Carnegie Mellon, and Stanford have been central to defense-related AI innovation through programs funded by agencies like DARPA and the former Joint Artificial Intelligence Center (JAIC), which was merged into the Chief Digital and Artificial Intelligence Office (CDAO) in 2022. Professional Military Education (PME) programs and senior officer fellowships at these schools are designed to develop strategic thinking and technical expertise among military leaders.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://openai.com/index/our-agreement-with-the-department-of-war/">Our agreement with the Department of War - OpenAI</a></li>
-<li><a href="https://www.newswall.org/summary/sam-altman-tells-staff-at-an-all-hands-that-openai-is-negotiating-a-deal-with-the-pentagon-after-trump-orders-the-end-of-anthropic-contracts">Pentagon Endorses OpenAI's Military Safety Guidelines</a></li>
-<li><a href="https://www.anthropic.com/news/statement-department-of-war">Statement from Dario Amodei on our discussions with the Department of War - Anthropic</a></li>
+<li><a href="https://baike.baidu.com/item/美国国防部联合人工智能中心/50348841">美国国防部联合人工智能中心_百度百科</a></li>
+<li><a href="http://www.mod.gov.cn/gfbw/qwfb/yw_214049/4881004.html">聚力推进军事职业教育高质量发展 - 中华人民共和国国防部</a></li>
+<li><a href="https://news.qq.com/rain/a/20240930A052C000">美国陆军人工智能项目——Linchpin_腾讯新闻</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#AI Policy`, `#National Security`, `#OpenAI`, `#AI Ethics`, `#Government Procurement`
+**Tags**: `#defense-technology`, `#ai-research`, `#military-policy`, `#academic-partnerships`, `#geopolitics`
 
 ---
 
 <a id="item-8"></a>
-## [Pentagon to ban officers from attending Ivy League and top AI research universities starting 2026-2027](https://fortune.com/2026/02/28/pentagon-officer-education-ivy-league-schools-universities-partners-ai-space/) ⭐️ 8.0/10
+## [Research shows major LLM performance drop in multi-turn conversations, GPT-5 accuracy loss up to 33%](https://arxiv.org/abs/2505.06120) ⭐️ 8.0/10
 
-U.S. Defense Secretary Pete Hegseth signed a memorandum stating that starting in the 2026-2027 academic year, officers will be prohibited from attending Ivy League schools like Harvard and Yale, as well as other top universities including MIT, for advanced education. The policy shift also affects institutions with critical military AI partnerships, such as Carnegie Mellon University, with the Pentagon citing ideological concerns and a desire to stop investing in schools it claims foster anti-American sentiment. This decision represents a significant strategic realignment in military-academic collaboration, potentially disrupting long-standing talent pipelines and innovation channels critical for national security, especially in artificial intelligence. It could slow down the U.S. military's access to cutting-edge AI research and development, which has historically relied on partnerships with elite research universities to maintain technological superiority. The ban will affect multiple senior officer fellowship and professional military education programs, with the Pentagon seeking new partnerships with institutions like Liberty University and George Mason University instead. The U.S. Army Artificial Intelligence Integration Center (AI2C) and the Space Force have not yet commented on the specific impact of this directive on their existing university partnerships.
-
-telegram · zaihuapd · Mar 1, 01:03
-
-**Background**: The Pentagon has long utilized Professional Military Education (PME) programs at elite universities to develop its officer corps. Universities like Carnegie Mellon have been central to U.S. military AI innovation; for example, the Army Futures Command located its AI Task Force hub at CMU in 2018 and awarded it a major contract in 2020 to lead an AI innovation framework. The Army AI Integration Center's (AI2C) mission is to accelerate AI adoption across the service by developing workforce and driving innovation.
-
-<details><summary>References</summary>
-<ul>
-<li><a href="https://www.cmu.edu/news/stories/archives/2018/december/army-ai-task-force.html">Army AI Task Force Selects Carnegie Mellon as New Hub - News - Carnegie Mellon University</a></li>
-<li><a href="https://ai2c.army.mil/">AI2C – ARMY ARTIFICIAL INTELLIGENCE INTEGRATION CENTER</a></li>
-<li><a href="https://www.dailycamera.com/2026/02/27/education-pentagon/">Pentagon to cut ties with Columbia, Yale, Brown and others Hegseth...</a></li>
-
-</ul>
-</details>
-
-**Tags**: `#military-policy`, `#ai-research`, `#academic-collaboration`, `#national-security`, `#education-policy`
-
----
-
-<a id="item-9"></a>
-## [Research Shows LLMs Suffer Severe Performance Drop in Multi-Turn Conversations, GPT-5 Accuracy Loss Up to 33%](https://arxiv.org/abs/2505.06120) ⭐️ 8.0/10
-
-New research reveals that large language models (LLMs), including cutting-edge models like GPT-5, suffer a severe performance drop in multi-turn conversations, with an average accuracy loss of 39% and a loss of up to 33% for the most advanced models. The study found that models often make incorrect assumptions early in a conversation and struggle to self-correct, leading to them getting 'lost' in complex interactions. This finding is critical because multi-turn conversations are fundamental to real-world applications like customer service, tutoring, and complex task assistance, meaning this performance gap directly impacts the reliability and usefulness of current AI systems. It suggests a fundamental architectural or training limitation in state-of-the-art LLMs, rather than a simple parameter-tuning issue, pointing to a core challenge for the next generation of conversational AI. While performance on specific tasks like Python coding was slightly better, technical interventions like lowering the sampling temperature were found to be ineffective in solving the core problem. The researchers suggest a practical workaround: when a conversation deviates from expectations, users should reset the model's state by summarizing previous requirements and starting a new conversation.
+A new study reveals that large language models (LLMs) suffer significant performance degradation in multi-turn conversations, with an average performance drop of 39%. Even state-of-the-art models like GPT-5 experience up to a 33% accuracy loss when handling tasks spanning multiple conversational turns. This finding exposes a critical reliability bottleneck for practical applications of LLMs, as most real-world uses like chatbots, coding assistants, and customer service involve multi-turn interactions. It challenges the assumption that scaling model size alone guarantees robust conversational performance and highlights a key area for future model improvement. The study found that models often make incorrect assumptions early in a conversation and struggle to self-correct, leading them to become 'lost' in complex interactions. While performance on specific tasks like Python coding was slightly better, technical interventions like lowering the sampling temperature were ineffective at solving the core problem.
 
 telegram · zaihuapd · Mar 1, 02:19
 
-**Background**: Large language models (LLMs) like GPT-5 are typically evaluated on single-turn tasks, where a user provides one instruction and the model gives one response. However, real-world use often involves multi-turn conversations, where context builds over several exchanges, posing a significantly harder challenge for model coherence and consistency. Benchmarks like MultiChallenge have been developed to specifically evaluate this underexamined but crucial capability, identifying common and realistic challenges in human-LLM interactions. The sampling temperature is a key hyperparameter that controls the randomness of an LLM's outputs, with lower values making responses more deterministic and focused.
+**Background**: Large Language Models (LLMs) like GPT-5 are AI systems trained on vast text data to generate human-like text. Multi-turn conversations involve a sequence of related queries and responses, which is a more realistic test than single-turn tasks where the model responds to an isolated prompt. Benchmarks like MultiChallenge have been developed to specifically evaluate this crucial, yet underexamined, conversational capability. The sampling temperature is a parameter that controls the randomness of an LLM's text generation.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://arxiv.org/abs/2501.17399">MultiChallenge: A Realistic Multi-Turn Conversation Evaluation ...</a></li>
-<li><a href="https://arxiv.org/html/2506.07295v1">Exploring the Impact of Temperature on Large Language Models: Hot or Cold?</a></li>
+<li><a href="https://arxiv.org/abs/2501.17399">MultiChallenge: A Realistic Multi-Turn Conversation ...</a></li>
+<li><a href="https://medium.com/@kiranvutukuri/88-temperature-top-k-nucleus-sampling-controlling-llm-generation-3e034afc805b">88. Temperature , Top-K, Nucleus Sampling : Controlling LLM ...</a></li>
 
 </ul>
 </details>
@@ -228,88 +205,111 @@ telegram · zaihuapd · Mar 1, 02:19
 
 ---
 
-<a id="item-10"></a>
+<a id="item-9"></a>
 ## [Obsidian Sync launches headless client for programmatic vault access](https://help.obsidian.md/sync/headless) ⭐️ 7.0/10
 
-Obsidian has released an official headless client for its Sync service, enabling users to programmatically access, sync, and manage their Obsidian vaults without the desktop or mobile app. This Node.js-based command-line tool, announced via the official help documentation and GitHub repository, unlocks new automation workflows. This is significant because it bridges a major gap for developers and power users who wanted to integrate Obsidian vaults into automated pipelines, such as for publishing blogs, building RAG (Retrieval-Augmented Generation) systems, or performing server-side backups. It transforms Obsidian from a purely user-facing application into a programmable data layer, aligning with trends in developer tooling and automation. The headless client requires Node.js 22 or later and is available on GitHub under the obsidianmd organization. It provides programmatic access specifically to vaults synced via the paid Obsidian Sync service, not local vaults managed by other means like Git.
+Obsidian Sync, the encrypted synchronization service for the popular note-taking app, has released a headless client. This new client provides a command-line interface (CLI) and programmatic API for accessing and automating tasks within Obsidian vaults without needing the graphical user interface. This enables developers and power users to integrate their Obsidian vaults directly into automated workflows, server-side applications, and development pipelines. It significantly expands Obsidian's utility beyond personal note-taking into areas like automated content publishing, Retrieval-Augmented Generation (RAG) systems, and CI/CD processes that involve documentation. The headless client is part of Obsidian Sync, a subscription service, meaning programmatic access requires an active Sync subscription. Alongside this release, Obsidian also introduced a separate general CLI tool, broadening its command-line capabilities beyond just sync operations.
 
 hackernews · adilmoujahid · Feb 28, 16:31
 
-**Background**: Obsidian is a popular knowledge management and note-taking application that stores data in local folders called 'vaults' containing Markdown files. Obsidian Sync is a paid service that synchronizes these vaults across devices. A 'headless' client is a software interface that provides core functionality (like syncing) without a graphical user interface (GUI), designed to be controlled programmatically or via command line for automation and integration purposes.
+**Background**: Obsidian is a popular, locally-stored note-taking application that uses Markdown files organized within folders called 'vaults'. Obsidian Sync is its official, encrypted cloud synchronization service that keeps these vaults updated across multiple devices. A 'headless client' is a software client designed to run without a graphical user interface, typically accessed via command line or API, which is common for automation and server-side integration tasks.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://github.com/obsidianmd/obsidian-headless">GitHub - obsidianmd/obsidian-headless: Headless client for Obsidian ...</a></li>
-<li><a href="https://sesamedisk.com/obsidian-sync-headless-client-automation/">Obsidian Sync Headless Client: Automation Unlocked</a></li>
-<li><a href="https://www.techtarget.com/searchapparchitecture/tip/An-overview-of-headless-architecture-design">An overview of headless architecture design - TechTarget</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Obsidian_(software)">Obsidian (software) - Wikipedia</a></li>
+<li><a href="https://help.obsidian.md/">Home - Obsidian Help</a></li>
+<li><a href="https://deepwiki.com/firezone/firezone/4.2-headless-client">Headless Client | firezone/firezone | DeepWiki</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The community reaction is overwhelmingly positive, with users expressing excitement for server-side automation and RAG applications. Specific use cases mentioned include automated blog publishing and CLI integration. A team member involved in the project offered to answer questions, indicating direct developer engagement. One user expressed a related desire to edit single Markdown files without creating a full vault.
+**Discussion**: Community reaction is highly positive, with users expressing excitement for enabling server-side automation and RAG applications. A project team member actively engaged to answer questions. Specific use cases shared include automated blog publishing and CLI integration, though one user noted a desire to edit single Markdown files without creating a full vault.
 
-**Tags**: `#obsidian`, `#automation`, `#markdown`, `#developer-tools`, `#sync`
+**Tags**: `#obsidian`, `#automation`, `#markdown`, `#sync`, `#developer-tools`
+
+---
+
+<a id="item-10"></a>
+## [Community Highlights Opaque Bans and Appeal Risks for Google Gemini API Users](https://github.com/google-gemini/gemini-cli/discussions/20632) ⭐️ 7.0/10
+
+A community discussion on GitHub has brought to light concerns about Google's enforcement practices for its Gemini API, where users report being permanently banned without clear explanations or a viable human appeal process. The discussion, which has garnered over 180 comments, specifically mentions bans related to using third-party tools like 'gemini-cli' and 'antigravity' to access backend services. This matters because opaque, automated enforcement with permanent consequences poses a significant risk to developers and businesses who rely on Google's AI services, potentially leading to the loss of critical account access and data. It highlights a systemic issue in API governance where automated systems can inflict severe penalties without human oversight or clear communication, eroding trust in the platform. Users report a two-stage ban process: an initial restriction that may be automatically lifted after filling out a form, followed by a second, permanent ban triggered by another automated flag, after which appeals are reportedly denied. The enforcement appears to target the use of third-party software to 'piggyback' on OAuth authentication for services like Gemini CLI, though the specific terms of service violations remain unclear to affected users.
+
+hackernews · RyanShook · Feb 28, 13:50
+
+**Background**: The Gemini API is Google's interface for developers to access its Gemini family of AI models, offering both free tiers with rate limits and paid, usage-based pricing. API governance refers to the policies and standards an organization sets for how its APIs are designed, used, and maintained, which includes enforcement mechanisms for terms of service violations. An account suspension appeal process is a standard procedure in many online services where users can contest a ban, but its effectiveness depends on the availability of human review and clear communication.
+
+<details><summary>References</summary>
+<ul>
+<li><a href="https://ai.google.dev/gemini-api/docs">Gemini API</a></li>
+<li><a href="https://www.postman.com/api-platform/api-governance/">What Is API Governance? Best Practices & Getting Started - Postman</a></li>
+<li><a href="https://help.etsy.com/hc/en-us/articles/6298920789271-How-to-File-an-Appeal-for-a-Permanently-Suspended-Account">How to File an Appeal for a Permanently Suspended Account – Etsy Help</a></li>
+
+</ul>
+</details>
+
+**Discussion**: The community sentiment is overwhelmingly critical and concerned, focusing on the high risks of using Google services tied to a primary account due to potential 'cross damage' like losing Gmail access. Key viewpoints include frustration with the lack of specific reasons for bans, the automated and seemingly arbitrary appeal process, and criticism that Google's policies may be designed to discourage third-party tool usage in favor of its own applications.
+
+**Tags**: `#AI Ethics`, `#Google Services`, `#API Governance`, `#Account Security`, `#Community Feedback`
 
 ---
 
 <a id="item-11"></a>
-## [Google's Opaque Gemini API Bans Spark Concerns Over Account Security](https://github.com/google-gemini/gemini-cli/discussions/20632) ⭐️ 7.0/10
+## [Interactive explanations proposed as a solution to cognitive debt from AI-generated code](https://simonwillison.net/guides/agentic-engineering-patterns/interactive-explanations/#atom-everything) ⭐️ 7.0/10
 
-A public discussion on GitHub highlights that Google has been suspending user accounts for Gemini API usage, often without clear explanations, and these suspensions can lead to permanent bans and potentially lock users out of their primary Google services like Gmail. The enforcement appears to be automated, with users reporting a lack of effective human appeal processes after receiving generic warnings about violating terms of service. This matters because it exposes a significant platform risk for developers and businesses relying on Google's AI services, where opaque, automated enforcement can jeopardize access to critical, interconnected services tied to a single Google account. It raises questions about the sustainability of building on platforms where access can be revoked without transparent due process, potentially chilling innovation and adoption. Google's official policy states that serious violations can lead to permanent closure of access to both the Gemini API and other Google services, and they claim to provide an appeal link in such cases. However, community reports contradict this, describing a cycle where an initial automated unban is followed by a second, permanent ban triggered by another automated flag, with support bots citing the Terms of Service without specifying the actual violation.
+Simon Willison introduces the concept of 'cognitive debt' that accumulates when developers don't fully understand code generated by AI agents, and proposes 'interactive explanations' as a method to improve understanding. He demonstrates this approach by creating an animated visualization to explain the 'Archimedean spiral placement' algorithm used in an AI-generated Rust word cloud application. This matters because as AI-assisted development becomes more prevalent, teams risk accumulating cognitive debt that can slow progress and reduce confidence in their codebase, similar to technical debt. Interactive explanations offer a practical way to maintain understanding and control over increasingly complex, AI-generated systems, ensuring developers can continue to reason about and evolve their applications. The interactive explanation was built as an HTML page with an animation slider that visualizes the word cloud placement algorithm step-by-step, allowing pausing, speed adjustment, and frame-by-frame stepping. This approach goes beyond static code walkthroughs by creating a dynamic, visual understanding of complex algorithms that are difficult to grasp from code or text descriptions alone.
 
-hackernews · RyanShook · Feb 28, 13:50
+rss · Simon Willison · Feb 28, 23:09
 
-**Background**: The Gemini API is Google's interface for developers to integrate its Gemini family of large language models into applications. Google accounts are central to accessing a wide ecosystem of services, including Gmail, Drive, and Google Cloud. Automated abuse monitoring and enforcement are common among large platforms to manage scale, but they can lead to false positives and user frustration when appeal mechanisms are ineffective or opaque.
+**Background**: Cognitive debt is a recently popularized term describing the loss of expertise and understanding that accumulates when problem-solving shifts from humans to AI algorithms, particularly in software development. Agentic engineering patterns refer to systematic approaches for working with AI agents that can autonomously write and modify code. As the cost of generating initial working code with AI drops dramatically, the central challenge shifts from writing code to understanding and maintaining the code that agents produce.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://ai.google.dev/gemini-api/docs/usage-policies">Abuse monitoring | Gemini API | Google AI for Developers</a></li>
-<li><a href="https://ucstrategies.com/news/google-suspends-ai-pro-and-ultra-accounts-without-warning-for-using-openclaw-while-others-only-block-the-integration/">Google Suspends AI Pro and Ultra Accounts Without Warning for ...</a></li>
+<li><a href="https://margaretstorey.com/blog/2026/02/09/cognitive-debt/">How Generative and Agentic AI Shift Concern from Technical Debt to Cognitive Debt</a></li>
+<li><a href="https://simonwillison.net/2026/Feb/23/agentic-engineering-patterns/">Writing about Agentic Engineering Patterns</a></li>
 
 </ul>
 </details>
 
-**Discussion**: The community expresses strong concern and frustration. Users describe the risk as a "digital death sentence" for losing access to primary email, criticize the confusing and opaque enforcement policies, and share specific experiences of being banned without clear reasons. There is a consensus that tying experimental or high-risk API usage to a primary Google account is too dangerous due to the potential for cross-service collateral damage and the lack of human support.
-
-**Tags**: `#google-gemini`, `#api-policies`, `#account-suspension`, `#platform-risk`, `#ai-services`
+**Tags**: `#AI-assisted-development`, `#software-engineering`, `#cognitive-debt`, `#agentic-patterns`, `#code-understanding`
 
 ---
 
 <a id="item-12"></a>
-## [Interactive explanations proposed as a solution to 'cognitive debt' in agentic engineering](https://simonwillison.net/guides/agentic-engineering-patterns/interactive-explanations/#atom-everything) ⭐️ 7.0/10
+## [Security Expert Urges Industry to Stop Using Passkeys for Data Encryption](https://simonwillison.net/2026/Feb/27/passkeys/#atom-everything) ⭐️ 7.0/10
 
-Simon Willison introduces the concept of 'cognitive debt' as a key challenge when developers lose understanding of AI-generated code, and advocates for 'interactive explanations' as a method to pay down this debt. He demonstrates this with a concrete example, asking an AI to create an animated, interactive visualization to explain the 'Archimedean spiral placement' algorithm used in a Rust word cloud generator. This matters because as AI agents write more complex code, developers risk losing the ability to reason about their own systems, which can slow progress and increase maintenance costs, similar to technical debt. Proactively building interactive explanations is a practical pattern that helps teams maintain understanding, ensure system reliability, and safely build upon AI-generated work. The interactive explanation was built as a web page with an animation slider that can be paused, speed-adjusted, or stepped through frame-by-frame to visualize the word placement algorithm. This approach goes beyond static code walkthroughs by providing an intuitive, visual understanding of complex algorithmic behavior, directly addressing the core issue of cognitive debt.
+Security expert Tim Cappalli issued a strong public plea for the identity industry to stop promoting and using passkeys to encrypt user data. This warning highlights that users frequently lose their passkeys, which can render their encrypted data permanently unrecoverable. This matters because conflating authentication with encryption creates a single point of failure, risking irreversible loss of sensitive user data like documents and memories. It underscores a critical architectural anti-pattern that could undermine user trust in passkey technology if not addressed. The misuse involves using the WebAuthn PRF (Pseudo-Random Function) extension to derive encryption keys from passkeys. A key caveat is that this functionality, while technically possible in browsers like Chrome, turns the passkey into a sole decryption key with no practical recovery mechanism if lost.
 
-rss · Simon Willison · Feb 28, 23:09
+rss · Simon Willison · Feb 27, 22:49
 
-**Background**: Agentic engineering involves using autonomous or semi-autonomous AI agents to assist in software development. A key resource is the 'Awesome Agentic Patterns' catalogue, which documents real-world tricks and workflows for building effective agents. Cognitive debt is an emerging concept describing the accumulated mental effort required to understand, predict, and safely modify a system, particularly one built with significant AI assistance. It is seen as a parallel concern to traditional technical debt in the era of AI-assisted development.
+**Background**: Passkeys are a passwordless authentication standard based on public-key cryptography, designed to be phishing-resistant. They typically work by having a user's device (like a phone or security key) prove possession of a private key to a website's public key. The WebAuthn PRF extension allows a passkey to generate a deterministic, secret value, which some developers have repurposed to create encryption keys for user data, moving beyond its intended authentication role.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://agentic-patterns.com/">Awesome Agentic Patterns</a></li>
-<li><a href="https://medium.com/@motiramshinde944/cognitive-debt-the-tool-that-measures-what-most-tools-miss-791ec8e2a26c">cognitive-debt: The Tool That Measures What Most Tools Miss | by Motiram Shinde</a></li>
+<li><a href="https://blog.timcappalli.me/p/passkeys-prf-warning/">Please, please, please stop using passkeys for encrypting user data</a></li>
+<li><a href="https://www.corbado.com/blog/passkeys-prf-webauthn">Passkeys & WebAuthn PRF for End-to-End Encryption (2026)</a></li>
+<li><a href="https://dev.to/nader0913/why-passkeys-arent-ready-for-encrypting-your-user-data-yet-437p">Why Passkeys Aren't Ready for Encrypting Your... - DEV Community</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#agentic-engineering`, `#cognitive-debt`, `#ai-assisted-development`, `#software-maintenance`
+**Tags**: `#security`, `#passkeys`, `#usability`, `#encryption`, `#authentication`
 
 ---
 
 <a id="item-13"></a>
-## [Prototype Unicode Explorer uses HTTP range requests with binary search for efficient data lookup.](https://simonwillison.net/2026/Feb/27/unicode-explorer/#atom-everything) ⭐️ 7.0/10
+## [Prototype Unicode Explorer uses HTTP range requests with binary search for efficient data lookup](https://simonwillison.net/2026/Feb/27/unicode-explorer/#atom-everything) ⭐️ 7.0/10
 
-Developer Simon Willison built a prototype web tool that performs binary search on a 76.6MB Unicode metadata file using HTTP range requests via the fetch() API. The tool was developed with assistance from the Claude LLM, which helped brainstorm the use case and generate the initial code specification. This demonstrates a creative and practical application of HTTP range requests for efficiently querying large, sorted datasets directly from a web browser without downloading the entire file. It showcases how core web technologies can be combined with classic algorithms to solve modern problems and serves as an educational example of LLM-assisted, exploratory programming. The implementation required disabling HTTP compression (using 'Accept-Encoding': 'identity') because compression alters byte offsets, which is incompatible with precise range requests. The tool queries a CORS-enabled file hosted on S3 and fronted by Cloudflare, and a search for a character like '&' takes about 17 steps and transfers roughly 3,864 bytes.
+Developer Simon Willison built a prototype web tool that performs binary search over a 76.6MB Unicode metadata file using HTTP range requests (the `Range` header in `fetch()`). The tool was developed with LLM assistance, where Claude helped brainstorm the use case and generate the initial specification. This demonstrates a creative and practical application of a standard but underutilized web protocol feature (HTTP range requests) for efficient data retrieval without downloading entire large files. It showcases how LLMs can assist in exploratory programming and provides a tangible example of algorithmic thinking applied to web development, potentially inspiring similar optimizations for other large, sorted datasets served over HTTP. The implementation required disabling HTTP compression (using `'Accept-Encoding': 'identity'`) because compression alters byte offsets, making range requests unreliable; however, the author notes that CDNs like Cloudflare automatically skip compression when a `Range` header is present. The tool performs the search by making multiple partial requests to a CORS-enabled file hosted on S3 behind Cloudflare, typically finding a result in about 17 steps with only a few kilobytes transferred.
 
 rss · Simon Willison · Feb 27, 17:50
 
-**Background**: HTTP range requests, defined in HTTP/1.1, allow a client to request only a specific portion (a byte range) of a resource from a server, which is useful for bandwidth optimization and accessing parts of large files like videos or datasets. Binary search is an efficient algorithm for finding an item in a sorted list by repeatedly dividing the search interval in half. Unicode is a universal character encoding standard that assigns a unique numeric code point (like U+0026 for '&') to every character across most of the world's writing systems, and its metadata includes information about these code points.
+**Background**: HTTP range requests (or byte serving) are a feature of HTTP/1.1 and later that allow a client to request only a specific portion (a range of bytes) of a resource from a server, indicated by the `Range` request header. This is commonly used for resuming downloads or streaming media (like video) where seeking is required. Binary search is a fundamental algorithm that efficiently finds a target value in a sorted array by repeatedly dividing the search interval in half, achieving logarithmic time complexity. Unicode is a universal character encoding standard that assigns a unique number (codepoint) to every character across writing systems, and its metadata includes information like character names and categories.
 
 <details><summary>References</summary>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/HTTP_Range_request">HTTP Range request</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Range_requests">HTTP range requests - HTTP | MDN</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Code_point">Code point - Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">Binary search algorithm</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Unicode">Unicode - Wikipedia</a></li>
 
 </ul>
 </details>
@@ -321,65 +321,41 @@ rss · Simon Willison · Feb 27, 17:50
 <a id="item-14"></a>
 ## [Google Chrome Automatically Downloads 4GB Local AI Model Gemini Nano by Default](https://winaero.com/google-chrome-secretly-downloads-huge-local-ai-models/) ⭐️ 7.0/10
 
-Google Chrome has been discovered automatically downloading a 4GB local AI model file named 'weights.bin' by default. This file powers built-in AI features like the Prompt API, translation, and summarization. This represents a significant shift in browser architecture, embedding large-scale AI locally, which impacts user disk space and data usage without explicit consent. It highlights the industry trend of moving AI processing on-device for speed and privacy, but raises questions about transparency and user control over resource allocation. The model, Gemini Nano, runs locally to enable features like the Prompt API, which is currently available only in Chrome 138+ and works primarily within extension contexts. Users can disable the feature via experimental flags and delete the file to free up space, but doing so will disable the associated AI functionalities.
+Google Chrome has been discovered to automatically download a large local AI model file named 'weights.bin', approximately 4GB in size, under its default configuration. This file is used to power built-in AI features such as the Prompt API, translation, and summarization. This practice by a major browser vendor represents a significant shift towards embedding powerful, on-device AI capabilities directly into the web platform, which can improve performance and privacy. However, the automatic, large-scale download without explicit user consent raises important questions about user control, transparency, and system resource consumption for millions of users. The model file is stored in a folder named 'OptGuideOnDeviceModel', and users can disable the feature via experimental flags and manually delete the folder to reclaim disk space, though doing so will disable the associated AI functions. The use of a local model, as opposed to a cloud-based one, is intended to provide faster response times and keep user data on the device.
 
 telegram · zaihuapd · Feb 28, 05:02
 
-**Background**: Gemini Nano is a lightweight version of Google's Gemini AI model family designed to run efficiently on consumer devices. The Chrome Prompt API is a developer interface that allows extensions to access this local model for tasks like text processing, enabling privacy-sensitive applications by avoiding external server calls. A 'weights.bin' file is a common format for storing the learned parameters (weights) of a neural network model in a binary format.
+**Background**: Gemini Nano is a lightweight version of Google's Gemini AI model family, designed to run efficiently on consumer devices like smartphones and laptops. The 'weights.bin' file contains the model's learned parameters, which are essential for its function. Google's Chrome team has been developing a 'Prompt API' proposal, which is a web API that would allow websites to interact with browser-provided, on-device language models for tasks like rewriting or summarizing text.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://developer.chrome.com/docs/ai/get-started">Get started with built-in AI | AI on Chrome | Chrome for Developers</a></li>
-<li><a href="https://medium.com/@dobidev/building-a-privacy-first-summarizer-with-chrome-prompt-api-and-structured-output-25d51759de9b">Building a Privacy-First Summarizer with Chrome Prompt API and...</a></li>
-<li><a href="https://github.com/tensorflow/tfjs/issues/6370">How we can utilize Tensorflow.JS model .json and weights . bin file ...</a></li>
+<li><a href="https://github.com/webmachinelearning/prompt-api">webmachinelearning/prompt-api: A proposal for a web API for prompting browser-provided language models - GitHub</a></li>
+<li><a href="https://www.reddit.com/r/chrome/comments/1jslb22/optguideondevicemodel_folder_taking_up_3gb_have/">"OptGuideOnDeviceModel" folder taking up 3GB. Have no idea what this folder does. : r/chrome - Reddit</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#Google Chrome`, `#AI Models`, `#Privacy`, `#Browser`, `#Local AI`
+**Tags**: `#browser`, `#ai-models`, `#privacy`, `#google-chrome`, `#local-ai`
 
 ---
 
 <a id="item-15"></a>
-## [South Korea's Tax Service Exposes Hardware Wallet Seed Phrase, Leading to $4.8M Token Transfer and Return](https://www.mk.co.kr/cn/stock/11974731) ⭐️ 7.0/10
+## [South Korea's Tax Agency Leaks Hardware Wallet Seed Phrase, Leading to $4.8M Crypto Transfer](https://www.mk.co.kr/cn/stock/11974731) ⭐️ 7.0/10
 
-South Korea's National Tax Service (NTS) accidentally published the complete seed phrase of a seized Ledger hardware wallet in a press release, leading to the unauthorized transfer of 4 million PRTG tokens worth approximately $4.8 million. Approximately 20 hours later, the tokens were returned to the original wallet address. This incident highlights a severe institutional security failure by a government agency responsible for handling seized digital assets, undermining public trust in their competence. It serves as a critical case study in the catastrophic consequences of poor operational security (OpSec) for high-value, low-liquidity crypto assets held by authorities. The exposed seed phrase belonged to wallets that had been inactive since January 2023 and collectively held 40% of the total PRTG token supply. PRTG has extremely low liquidity, trading only on the MEXC exchange with a daily volume of around $332, meaning selling just $59 worth could cause a 2% price drop.
+South Korea's National Tax Service (NTS) accidentally published the complete seed phrase of a seized Ledger hardware wallet in an unredacted press release image. Shortly after the leak, 4 million PRTG tokens worth approximately $4.8 million were transferred from the affected wallet, though the funds were returned about 20 hours later. This incident highlights a critical failure in digital asset security protocols by a government agency, undermining trust in institutional custody of cryptocurrencies. It also exposes the extreme vulnerability of low-liquidity tokens like PRTG, where a single transaction can significantly impact the market price. The leaked seed phrase provided full control over the wallet. The affected wallets, which had been inactive since January 2023, collectively held 40% of PRTG's total supply. PRTG has extremely low liquidity, trading only on MEXC with a daily volume around $332, meaning a sell order of just $59 could cause a 2% price drop.
 
 telegram · zaihuapd · Feb 28, 11:27
 
-**Background**: A seed phrase (or mnemonic phrase) is a series of 12 to 24 human-readable words that represents the private keys to a cryptocurrency wallet, allowing full control over the assets within. Hardware wallets like Ledger are physical devices designed to store these private keys offline for enhanced security, with the seed phrase being the ultimate backup. The security of any hardware wallet entirely depends on the secrecy of this seed phrase; if exposed, anyone can access and drain the funds.
+**Background**: A seed phrase (or mnemonic phrase) is a series of words that acts as the master key to recover and control all assets in a cryptocurrency wallet, especially hardware wallets like Ledger. Hardware wallets are physical devices designed to securely store private keys offline. If a seed phrase is compromised, anyone can access and transfer the funds stored in the corresponding wallet, as it grants complete control.
 
 <details><summary>References</summary>
 <ul>
-<li><a href="https://finance.yahoo.com/news/ethereum-tokens-swiped-returned-south-172054726.html">Ethereum Tokens Swiped, Returned After South Korean Tax Service Publishes Wallet Seed Phrases - Yahoo Finance</a></li>
-<li><a href="https://guarda.com/academy/tutorials/mnemonic-wallet-phrases-what-are-they-for/">Mnemonic Wallet Phrases: What Are They and How to Import? Mnemonic Phrase: Wallet Keys Explained - plisio.net Mnemonic Code Converter | BIP39 Mnemonic to Private key Mnemonic Phrase: Your Secret to Crypto & Wallet Recovery What is a mnemonic phrase in Crypto Assets? The 12-word key ... What is Mnemonics in Cryptocurrency? - Darkex Official ... Mnemonic Phrases in Wallets: What You Need to Know</a></li>
-<li><a href="https://www.ledger.com/academy/hardwarewallet/best-practices-when-using-a-hardware-wallet">Security Tips for Hardware Wallets - Ledger</a></li>
+<li><a href="https://en.coinotag.com/south-korea-nts-seed-phrase-leak-48m-prtg-stolen">South Korea NTS Seed Phrase Leak: 4.8M$ PRTG Stolen</a></li>
+<li><a href="https://cybersecurefox.com/en/offline-phishing-trezor-ledger-hardware-wallet-seed-phrase-scam/">Offline Phishing Letters Target Trezor And Ledger Hardware Wallet ...</a></li>
 
 </ul>
 </details>
 
-**Tags**: `#cryptocurrency`, `#security`, `#institutional-failure`, `#blockchain`, `#digital-assets`
-
----
-
-<a id="item-16"></a>
-## [Leaked Motorola presentation reveals GrapheneOS partnership, first non-Pixel device possible by 2027](https://grapheneos.social/@GrapheneOS/116115497756691311) ⭐️ 7.0/10
-
-A leaked internal Motorola presentation slide shows GrapheneOS listed in the company's security features section, strongly suggesting a partnership. The GrapheneOS official account later stated on Mastodon that an OEM partner announcement is scheduled for March 2026, with a device launch planned for 2027. This represents a potential major expansion for GrapheneOS beyond its exclusive support for Google Pixel devices, significantly increasing its reach and legitimacy. A partnership with a major OEM like Motorola, which is owned by Lenovo and focuses on enterprise security, could bring hardened, privacy-focused Android to a much wider audience, including business users. The leak originated from a Reddit post in the r/GrapheneOS subreddit before being removed by moderators. Neither GrapheneOS nor Motorola has issued an official statement confirming the partnership details, meaning the information remains unverified and based on unofficial sources.
-
-telegram · zaihuapd · Feb 28, 12:38
-
-**Background**: GrapheneOS is a non-profit, open-source mobile operating system forked from Android, renowned for its extreme focus on security and privacy enhancements over stock Android. It has historically only been officially supported on a select range of Google Pixel devices due to their robust hardware security features. An OEM (Original Equipment Manufacturer) partnership in the mobile industry typically involves deep integration of software or services into a device maker's hardware, often through pre-installation or system-level features.
-
-<details><summary>References</summary>
-<ul>
-<li><a href="https://www.allthingssecured.com/identity-protection/android-vs-grapheneos-compared/">Android vs GrapheneOS: Privacy, Security & Features Compared</a></li>
-<li><a href="https://www.opswat.com/blog/oem-partnerships">What Is an OEM Partner? Meaning, Roles & Business Benefits - OPSWAT</a></li>
-<li><a href="https://www.motorola.com/us-en/business/">Motorola for business</a></li>
-
-</ul>
-</details>
-
-**Tags**: `#mobile-security`, `#privacy`, `#android`, `#grapheneos`, `#oem-partnership`
+**Tags**: `#cryptocurrency`, `#security`, `#government`, `#blockchain`, `#privacy`
 
 ---

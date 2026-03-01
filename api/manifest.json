@@ -1,7 +1,7 @@
 {
   "version": "1",
-  "generated_at": "2026-03-01T02:07:22.931675Z",
-  "base_url": "https://thysrael.github.io/Horizon",
+  "generated_at": "2026-03-01T05:23:16.766203Z",
+  "base_url": "https://afetmin.github.io/Horizon",
   "items": [
     {
       "id": "2026-03-01-zh",
@@ -9,7 +9,7 @@
       "lang": "zh",
       "title": "Horizon Summary: 2026-03-01 (ZH)",
       "path": "/_posts/2026-03-01-summary-zh.md",
-      "url": "https://thysrael.github.io/Horizon/_posts/2026-03-01-summary-zh.md"
+      "url": "https://afetmin.github.io/Horizon/_posts/2026-03-01-summary-zh.md"
     },
     {
       "id": "2026-03-01-en",
@@ -17,7 +17,7 @@
       "lang": "en",
       "title": "Horizon Summary: 2026-03-01 (EN)",
       "path": "/_posts/2026-03-01-summary-en.md",
-      "url": "https://thysrael.github.io/Horizon/_posts/2026-03-01-summary-en.md"
+      "url": "https://afetmin.github.io/Horizon/_posts/2026-03-01-summary-en.md"
     }
   ]
 }
