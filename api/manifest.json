@@ -1,23 +1,23 @@
 {
   "version": "1",
-  "generated_at": "2026-03-09T01:50:48.254651Z",
+  "generated_at": "2026-03-11T01:33:06.006706Z",
   "base_url": "https://afetmin.github.io/Horizon",
   "items": [
     {
-      "id": "2026-03-09-zh",
-      "date": "2026-03-09",
+      "id": "2026-03-11-zh",
+      "date": "2026-03-11",
       "lang": "zh",
-      "title": "Horizon Summary: 2026-03-09 (ZH)",
-      "path": "/_posts/2026-03-09-summary-zh.md",
-      "url": "https://afetmin.github.io/Horizon/_posts/2026-03-09-summary-zh.md"
+      "title": "Horizon Summary: 2026-03-11 (ZH)",
+      "path": "/_posts/2026-03-11-summary-zh.md",
+      "url": "https://afetmin.github.io/Horizon/_posts/2026-03-11-summary-zh.md"
     },
     {
-      "id": "2026-03-09-en",
-      "date": "2026-03-09",
+      "id": "2026-03-11-en",
+      "date": "2026-03-11",
       "lang": "en",
-      "title": "Horizon Summary: 2026-03-09 (EN)",
-      "path": "/_posts/2026-03-09-summary-en.md",
-      "url": "https://afetmin.github.io/Horizon/_posts/2026-03-09-summary-en.md"
+      "title": "Horizon Summary: 2026-03-11 (EN)",
+      "path": "/_posts/2026-03-11-summary-en.md",
+      "url": "https://afetmin.github.io/Horizon/_posts/2026-03-11-summary-en.md"
     }
   ]
 }
