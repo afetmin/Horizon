@@ -31,7 +31,13 @@ jobs:
           mkdir -p docs/_posts docs/api
           if git ls-remote --exit-code --heads origin gh-pages; then
             git fetch origin gh-pages
-            git checkout origin/gh-pages -- docs/_posts docs/api/manifest.json || true
+            git checkout origin/gh-pages -- _posts api/manifest.json || true
+            if [ -d _posts ]; then
+              cp -R _posts/. docs/_posts/
+            fi
+            if [ -f api/manifest.json ]; then
+              cp api/manifest.json docs/api/manifest.json
+            fi
           fi
 
       - name: Run Horizon
@@ -43,6 +49,7 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           LWN_KEY: ${{ secrets.LWN_KEY }}
           HORIZON_PUBLIC_BASE_URL: ${{ vars.HORIZON_PUBLIC_BASE_URL }}
+          HORIZON_GENERATE_PLACEHOLDER_SUMMARY: "1"
         run: uv run horizon --hours 48
 
       - name: Deploy to GitHub Pages
