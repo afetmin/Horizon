@@ -22,7 +22,7 @@ from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
-from .storage.manifest import build_manifest, write_manifest
+from .storage.manifest import build_manifest, merge_manifest_items, write_manifest
 
 
 class HorizonOrchestrator:
@@ -449,7 +449,28 @@ class HorizonOrchestrator:
             output_path = Path("docs/api/manifest.json")
             base_url = os.getenv("HORIZON_PUBLIC_BASE_URL", "").strip() or None
             manifest = build_manifest(posts_dir=posts_dir, base_url=base_url)
+            existing_manifest = self._fetch_existing_manifest(base_url)
+            manifest = merge_manifest_items(manifest, existing_manifest)
             write_manifest(manifest, output_path)
             self.console.print(f"📱 Saved mobile manifest to: {output_path} ({len(manifest['items'])} items)\n")
         except Exception as e:
             self.console.print(f"[yellow]⚠️  Failed to generate mobile manifest: {e}[/yellow]\n")
+
+    def _fetch_existing_manifest(self, base_url: str | None) -> dict | None:
+        """Fetch the currently published manifest so new runs retain historical items."""
+        if not base_url:
+            return None
+
+        manifest_url = f"{base_url.rstrip('/')}/api/manifest.json"
+        try:
+            response = httpx.get(manifest_url, timeout=10.0)
+            if response.status_code == 404:
+                return None
+            response.raise_for_status()
+            data = response.json()
+            return data if isinstance(data, dict) else None
+        except Exception as e:
+            self.console.print(
+                f"[yellow]⚠️  Failed to fetch existing manifest from {manifest_url}: {e}[/yellow]"
+            )
+            return None

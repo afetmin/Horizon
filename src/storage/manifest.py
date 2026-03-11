@@ -74,6 +74,36 @@ def build_manifest(posts_dir: Path, base_url: str | None = None, generated_at: d
     }
 
 
+def merge_manifest_items(current_manifest: dict, existing_manifest: dict | None) -> dict:
+    """Merge current manifest items with an existing manifest, preferring current items."""
+    merged_by_id = {}
+
+    for item in (existing_manifest or {}).get("items", []):
+        if isinstance(item, dict) and item.get("id"):
+            merged_by_id[item["id"]] = item
+
+    normalized_base = current_manifest.get("base_url", "").rstrip("/")
+    for item in current_manifest.get("items", []):
+        item_id = item.get("id")
+        if not item_id:
+            continue
+        merged_item = dict(item)
+        relative_path = merged_item.get("path", "")
+        if normalized_base and relative_path:
+            merged_item["url"] = f"{normalized_base}{relative_path}"
+        merged_by_id[item_id] = merged_item
+
+    items = list(merged_by_id.values())
+    items.sort(key=lambda x: (x.get("date", ""), x.get("lang", "")), reverse=True)
+
+    return {
+        "version": current_manifest.get("version", "1"),
+        "generated_at": current_manifest.get("generated_at"),
+        "base_url": normalized_base,
+        "items": items,
+    }
+
+
 def write_manifest(manifest: dict, output_path: Path) -> None:
     """Write manifest JSON to disk."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
