@@ -211,8 +211,6 @@ def merge_release_manifest_items(current_manifest: dict, existing_manifest: dict
         "release_tag": current_manifest.get("release_tag", "mobile-feed"),
         "items": items,
     }
-
-
 def read_manifest(path: Path) -> dict | None:
     """Read a manifest JSON file from disk."""
     if not path.exists():

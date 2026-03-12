@@ -31,12 +31,9 @@ jobs:
           mkdir -p docs/_posts docs/api
           if git ls-remote --exit-code --heads origin gh-pages; then
             git fetch origin gh-pages
-            git checkout origin/gh-pages -- _posts api/manifest.json api/mobile-manifest.json || true
+            git checkout origin/gh-pages -- _posts api/mobile-manifest.json || true
             if [ -d _posts ]; then
               cp -R _posts/. docs/_posts/
-            fi
-            if [ -f api/manifest.json ]; then
-              cp api/manifest.json docs/api/manifest.json
             fi
             if [ -f api/mobile-manifest.json ]; then
               cp api/mobile-manifest.json docs/api/mobile-manifest.json

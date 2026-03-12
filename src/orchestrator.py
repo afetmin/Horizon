@@ -22,7 +22,10 @@ from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
-from .storage.manifest import build_manifest, build_mobile_cdn_manifest, write_manifest
+from .storage.manifest import (
+    build_mobile_cdn_manifest,
+    write_manifest,
+)
 
 
 class HorizonOrchestrator:
@@ -464,17 +467,9 @@ class HorizonOrchestrator:
         return await summarizer.generate_summary(items, date, total_fetched, language=language)
 
     def _update_mobile_manifest(self) -> None:
-        """Generate site and mobile manifests from local generated posts."""
+        """Generate the mobile manifest from the current published posts."""
         try:
             posts_dir = Path("docs/_posts")
-            base_url = os.getenv("HORIZON_PUBLIC_BASE_URL", "").strip() or None
-            site_manifest = build_manifest(posts_dir=posts_dir, base_url=base_url)
-            site_output_path = Path("docs/api/manifest.json")
-            write_manifest(site_manifest, site_output_path)
-            self.console.print(
-                f"📄 Saved site manifest to: {site_output_path} ({len(site_manifest['items'])} items)\n"
-            )
-
             repository = (
                 os.getenv("HORIZON_MOBILE_FEED_REPOSITORY", "").strip()
                 or os.getenv("GITHUB_REPOSITORY", "").strip()
