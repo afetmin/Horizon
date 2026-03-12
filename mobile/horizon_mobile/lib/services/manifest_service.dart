@@ -34,21 +34,7 @@ class ManifestService {
       throw HttpException('Digest request failed (${response.statusCode})');
     }
 
-    return _sanitizeMarkdown(response.body);
-  }
-
-  String _sanitizeMarkdown(String raw) {
-    var content = raw;
-
-    // Remove top YAML front matter block, which is not user-facing content.
-    final frontMatterPattern = RegExp(r'^\s*---\s*\n[\s\S]*?\n---\s*\n?', multiLine: false);
-    content = content.replaceFirst(frontMatterPattern, '');
-
-    // Remove empty HTML anchor tags used for web in-page navigation.
-    final anchorPattern = RegExp(r'<a\s+id="[^"]+"\s*>\s*<\/a>\s*\n?', caseSensitive: false);
-    content = content.replaceAll(anchorPattern, '');
-
-    return content.trimLeft();
+    return response.body;
   }
 
   Future<http.Response> _getWithOptionalFallback(String url) async {
