@@ -38,7 +38,7 @@ class _ManifestUrlDialogState extends State<ManifestUrlDialog> {
         keyboardType: TextInputType.url,
         decoration: InputDecoration(
           labelText: 'Remote manifest URL',
-          hintText: 'https://example.com/api/manifest.json',
+          hintText: 'https://github.com/owner/repo/releases/download/mobile-feed/manifest.json',
           errorText: _errorText,
         ),
       ),

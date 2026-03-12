@@ -159,24 +159,54 @@ uv run horizon --hours 48   # 抓取最近 48 小时的内容
 
 Horizon 非常适合作为 **GitHub Actions** 定时任务运行。查看 [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml) 获取现成的工作流配置，可自动生成日报并部署到 GitHub Pages。
 
-### 5. 移动端 Manifest（Flutter 使用）
+### 5. 移动端数据源（Flutter 使用）
 
-每次运行后，Horizon 会额外生成 `docs/api/manifest.json` 供移动端读取。
+Horizon 现在将移动端数据发布到 GitHub Release `mobile-feed`，不再依赖 GitHub Pages 的 `docs/api/manifest.json` 作为 App 数据源。
 
-- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`：日报正文
-- `docs/api/manifest.json`：移动端列表/详情使用的索引
+- `docs/api/manifest.json`：站点侧索引，供 GitHub Pages 页面使用
+- `data/mobile_feed/manifest.json`：移动端专用 manifest，本地生成后由 GitHub Actions 上传到 release
+- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`：当天生成的正文文件，同时会作为 release asset 上传
 
-建议在工作流环境变量中设置 `HORIZON_PUBLIC_BASE_URL`，确保 manifest 中的 `url` 为完整链接：
+移动端读取流程如下：
+
+1. App 只配置一个固定的 manifest URL
+2. App 请求该 manifest，拿到全部历史条目
+3. 每个 `item.url` 都是对应历史正文的 GitHub Release 直链
+4. App 再根据 `item.url` 拉取正文 markdown
+
+默认发布目标为固定 tag：`mobile-feed`。工作流每次执行时会：
+
+1. 先从 `mobile-feed` release 下载已有 `manifest.json`
+2. 运行 Horizon，生成当天摘要
+3. 合并历史条目，生成新的移动端 manifest
+4. 先上传当天正文资源，再上传新的 `manifest.json`
+
+这样可以保证：
+
+- manifest 地址固定不变
+- 历史条目始终保留在 manifest 中
+- 历史正文可通过 manifest 里的 `url` 直接访问
+- 移动端数据链路不受 Pages 构建、Jekyll `_posts` 暴露和站点缓存影响
+
+工作流中需要的环境变量：
 
 ```bash
 HORIZON_PUBLIC_BASE_URL=https://<你的-github-pages-域名>
+HORIZON_MOBILE_FEED_REPOSITORY=<owner>/<repo>
+HORIZON_MOBILE_FEED_TAG=mobile-feed
 ```
+
+说明：
+
+- `HORIZON_PUBLIC_BASE_URL` 仍然用于生成网站侧 `docs/api/manifest.json`
+- `HORIZON_MOBILE_FEED_REPOSITORY` 用于生成移动端 release asset URL
+- `HORIZON_MOBILE_FEED_TAG` 默认为 `mobile-feed`
 
 Flutter App 启动示例：
 
 ```bash
 cd mobile/horizon_mobile
-flutter run --dart-define=MANIFEST_URL=https://<你的-github-pages-域名>/api/manifest.json
+flutter run --dart-define=MANIFEST_URL=https://github.com/<owner>/<repo>/releases/download/mobile-feed/manifest.json
 ```
 
 ## 支持的信息源

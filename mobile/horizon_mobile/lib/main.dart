@@ -11,7 +11,7 @@ import 'widgets/manifest_url_dialog.dart';
 
 const defaultManifestUrl = String.fromEnvironment(
   'MANIFEST_URL',
-  defaultValue: 'https://afetmin.github.io/Horizon/api/manifest.json',
+  defaultValue: 'https://github.com/afetmin/Horizon/releases/download/mobile-feed/manifest.json',
 );
 
 void main() {

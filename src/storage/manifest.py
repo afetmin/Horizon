@@ -1,4 +1,4 @@
-"""Helpers for building a mobile-friendly summary manifest."""
+"""Helpers for building summary manifests for Pages and mobile clients."""
 
 from __future__ import annotations
 
@@ -38,32 +38,39 @@ def _read_front_matter_title(path: Path, date: str, lang: str) -> str:
     return _default_title(date, lang)
 
 
+def _iter_post_metadata(posts_dir: Path):
+    if not posts_dir.exists():
+        return
+
+    for path in posts_dir.glob("*-summary-*.md"):
+        match = POST_FILE_PATTERN.match(path.name)
+        if not match:
+            continue
+        date = match.group("date")
+        lang = match.group("lang")
+        title = _read_front_matter_title(path, date, lang)
+        yield path, date, lang, title
+
+
 def build_manifest(posts_dir: Path, base_url: str | None = None, generated_at: datetime | None = None) -> dict:
     """Build a stable JSON manifest from generated post markdown files."""
     normalized_base = (base_url or "").rstrip("/")
     now = generated_at or datetime.now(timezone.utc)
 
     items = []
-    if posts_dir.exists():
-        for path in posts_dir.glob("*-summary-*.md"):
-            match = POST_FILE_PATTERN.match(path.name)
-            if not match:
-                continue
-            date = match.group("date")
-            lang = match.group("lang")
-            relative_path = f"/_posts/{path.name}"
-            url = f"{normalized_base}{relative_path}" if normalized_base else relative_path
-            title = _read_front_matter_title(path, date, lang)
-            items.append(
-                {
-                    "id": f"{date}-{lang}",
-                    "date": date,
-                    "lang": lang,
-                    "title": title,
-                    "path": relative_path,
-                    "url": url,
-                }
-            )
+    for path, date, lang, title in _iter_post_metadata(posts_dir):
+        relative_path = f"/_posts/{path.name}"
+        url = f"{normalized_base}{relative_path}" if normalized_base else relative_path
+        items.append(
+            {
+                "id": f"{date}-{lang}",
+                "date": date,
+                "lang": lang,
+                "title": title,
+                "path": relative_path,
+                "url": url,
+            }
+        )
 
     items.sort(key=lambda x: (x["date"], x["lang"]), reverse=True)
     return {
@@ -72,6 +79,43 @@ def build_manifest(posts_dir: Path, base_url: str | None = None, generated_at: d
         "base_url": normalized_base,
         "items": items,
     }
+
+
+def build_release_manifest(
+    posts_dir: Path,
+    repository: str,
+    release_tag: str = "mobile-feed",
+    generated_at: datetime | None = None,
+) -> dict:
+    """Build a mobile manifest that points to GitHub release asset URLs."""
+    now = generated_at or datetime.now(timezone.utc)
+    repository_name = repository.strip().strip("/")
+    tag_name = release_tag.strip()
+
+    items = []
+    for path, date, lang, title in _iter_post_metadata(posts_dir):
+        items.append(
+            {
+                "id": f"{date}-{lang}",
+                "date": date,
+                "lang": lang,
+                "title": title,
+                "url": _build_release_asset_url(repository_name, tag_name, path.name),
+            }
+        )
+
+    items.sort(key=lambda x: (x["date"], x["lang"]), reverse=True)
+    return {
+        "version": "2",
+        "generated_at": now.isoformat().replace("+00:00", "Z"),
+        "source": "github-release",
+        "release_tag": tag_name,
+        "items": items,
+    }
+
+
+def _build_release_asset_url(repository: str, release_tag: str, filename: str) -> str:
+    return f"https://github.com/{repository}/releases/download/{release_tag}/{filename}"
 
 
 def merge_manifest_items(current_manifest: dict, existing_manifest: dict | None) -> dict:
@@ -102,6 +146,42 @@ def merge_manifest_items(current_manifest: dict, existing_manifest: dict | None)
         "base_url": normalized_base,
         "items": items,
     }
+
+
+def merge_release_manifest_items(current_manifest: dict, existing_manifest: dict | None) -> dict:
+    """Merge release-backed mobile manifest items, preferring current items."""
+    merged_by_id = {}
+
+    for item in (existing_manifest or {}).get("items", []):
+        if isinstance(item, dict) and item.get("id"):
+            merged_by_id[item["id"]] = item
+
+    for item in current_manifest.get("items", []):
+        item_id = item.get("id")
+        if not item_id:
+            continue
+        merged_by_id[item_id] = dict(item)
+
+    items = list(merged_by_id.values())
+    items.sort(key=lambda x: (x.get("date", ""), x.get("lang", "")), reverse=True)
+
+    return {
+        "version": current_manifest.get("version", "2"),
+        "generated_at": current_manifest.get("generated_at"),
+        "source": current_manifest.get("source", "github-release"),
+        "release_tag": current_manifest.get("release_tag", "mobile-feed"),
+        "items": items,
+    }
+
+
+def read_manifest(path: Path) -> dict | None:
+    """Read a manifest JSON file from disk."""
+    if not path.exists():
+        return None
+
+    with path.open(encoding="utf-8") as f:
+        data = json.load(f)
+    return data if isinstance(data, dict) else None
 
 
 def write_manifest(manifest: dict, output_path: Path) -> None:

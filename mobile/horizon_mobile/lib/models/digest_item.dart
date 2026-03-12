@@ -4,7 +4,6 @@ class DigestItem {
     required this.date,
     required this.lang,
     required this.title,
-    required this.path,
     required this.url,
     this.markdown,
   });
@@ -13,7 +12,6 @@ class DigestItem {
   final String date;
   final String lang;
   final String title;
-  final String path;
   final String url;
   final String? markdown;
 
@@ -23,7 +21,6 @@ class DigestItem {
       date: date,
       lang: lang,
       title: title,
-      path: path,
       url: url ?? this.url,
       markdown: markdown ?? this.markdown,
     );
@@ -35,7 +32,6 @@ class DigestItem {
       date: json['date'] as String,
       lang: json['lang'] as String,
       title: json['title'] as String,
-      path: json['path'] as String,
       url: json['url'] as String,
       markdown: json['markdown'] as String?,
     );
@@ -47,7 +43,6 @@ class DigestItem {
       'date': date,
       'lang': lang,
       'title': title,
-      'path': path,
       'url': url,
       'markdown': markdown,
     };

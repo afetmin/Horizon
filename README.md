@@ -148,24 +148,42 @@ The generated report will be saved to `data/summaries/`.
 
 Horizon works great as a **GitHub Actions** cron job. See [`.github/workflows/daily-summary.yml`](.github/workflows/daily-summary.yml) for a ready-to-use workflow that generates and deploys your daily briefing to GitHub Pages automatically.
 
-### 5. Mobile Manifest (for Flutter app)
+### 5. Mobile Feed (for Flutter app)
 
-After each run, Horizon also generates `docs/api/manifest.json` for mobile clients.
+Horizon now publishes mobile data to a dedicated GitHub Release tag, `mobile-feed`, instead of using GitHub Pages as the app data source.
 
-- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`: Jekyll post content
-- `docs/api/manifest.json`: machine-readable index for app list/detail pages
+- `docs/api/manifest.json`: site-facing manifest for GitHub Pages
+- `data/mobile_feed/manifest.json`: mobile manifest generated locally and uploaded to the release
+- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`: generated digest body, also uploaded as release assets
 
-Set `HORIZON_PUBLIC_BASE_URL` in your workflow environment so manifest URLs are absolute:
+The mobile flow is:
+
+1. The app stores one fixed manifest URL
+2. It loads the manifest and gets the full history list
+3. Each `item.url` points to a GitHub Release asset for that digest body
+4. The app fetches the markdown body from that URL
+
+Each scheduled workflow run does the following:
+
+1. Download the existing `manifest.json` from the `mobile-feed` release
+2. Run Horizon and generate today’s digests
+3. Merge the existing history into the new manifest
+4. Upload today’s digest assets first
+5. Upload the new `manifest.json` last
+
+Required workflow environment variables:
 
 ```bash
 HORIZON_PUBLIC_BASE_URL=https://<your-github-pages-domain>
+HORIZON_MOBILE_FEED_REPOSITORY=<owner>/<repo>
+HORIZON_MOBILE_FEED_TAG=mobile-feed
 ```
 
 Example mobile startup command:
 
 ```bash
 cd mobile/horizon_mobile
-flutter run --dart-define=MANIFEST_URL=https://<your-github-pages-domain>/api/manifest.json
+flutter run --dart-define=MANIFEST_URL=https://github.com/<owner>/<repo>/releases/download/mobile-feed/manifest.json
 ```
 
 ## Supported Sources

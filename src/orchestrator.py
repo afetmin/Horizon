@@ -22,7 +22,13 @@ from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
-from .storage.manifest import build_manifest, merge_manifest_items, write_manifest
+from .storage.manifest import (
+    build_manifest,
+    build_release_manifest,
+    merge_release_manifest_items,
+    read_manifest,
+    write_manifest,
+)
 
 
 class HorizonOrchestrator:
@@ -463,46 +469,40 @@ class HorizonOrchestrator:
         return await summarizer.generate_summary(items, date, total_fetched, language=language)
 
     def _update_mobile_manifest(self) -> None:
-        """Generate docs/api/manifest.json for mobile clients."""
+        """Generate site and mobile manifests from local generated posts."""
         try:
             posts_dir = Path("docs/_posts")
-            output_path = Path("docs/api/manifest.json")
             base_url = os.getenv("HORIZON_PUBLIC_BASE_URL", "").strip() or None
-            manifest = build_manifest(posts_dir=posts_dir, base_url=base_url)
-            existing_manifest = self._fetch_existing_manifest(base_url)
-            manifest = merge_manifest_items(manifest, existing_manifest)
-            write_manifest(manifest, output_path)
-            self.console.print(f"📱 Saved mobile manifest to: {output_path} ({len(manifest['items'])} items)\n")
+            site_manifest = build_manifest(posts_dir=posts_dir, base_url=base_url)
+            site_output_path = Path("docs/api/manifest.json")
+            write_manifest(site_manifest, site_output_path)
+            self.console.print(
+                f"📄 Saved site manifest to: {site_output_path} ({len(site_manifest['items'])} items)\n"
+            )
+
+            repository = (
+                os.getenv("HORIZON_MOBILE_FEED_REPOSITORY", "").strip()
+                or os.getenv("GITHUB_REPOSITORY", "").strip()
+            )
+            if not repository:
+                self.console.print(
+                    "[dim]Mobile feed manifest skipped: HORIZON_MOBILE_FEED_REPOSITORY is empty.[/dim]"
+                )
+                return
+
+            release_tag = os.getenv("HORIZON_MOBILE_FEED_TAG", "mobile-feed").strip() or "mobile-feed"
+            existing_manifest_path = Path("data/mobile_feed/existing-manifest.json")
+            existing_manifest = read_manifest(existing_manifest_path)
+            mobile_manifest = build_release_manifest(
+                posts_dir=posts_dir,
+                repository=repository,
+                release_tag=release_tag,
+            )
+            mobile_manifest = merge_release_manifest_items(mobile_manifest, existing_manifest)
+            mobile_output_path = Path("data/mobile_feed/manifest.json")
+            write_manifest(mobile_manifest, mobile_output_path)
+            self.console.print(
+                f"📱 Saved mobile feed manifest to: {mobile_output_path} ({len(mobile_manifest['items'])} items)\n"
+            )
         except Exception as e:
             self.console.print(f"[yellow]⚠️  Failed to generate mobile manifest: {e}[/yellow]\n")
-
-    def _fetch_existing_manifest(self, base_url: str | None) -> dict | None:
-        """Fetch the currently published manifest so new runs retain historical items."""
-        if not base_url:
-            self.console.print("[dim]Manifest merge skipped: HORIZON_PUBLIC_BASE_URL is empty.[/dim]")
-            return None
-
-        manifest_url = f"{base_url.rstrip('/')}/api/manifest.json"
-        self.console.print(f"[dim]Fetching existing manifest: {manifest_url}[/dim]")
-        try:
-            response = httpx.get(manifest_url, timeout=10.0)
-            self.console.print(
-                f"[dim]Existing manifest response status: {response.status_code}[/dim]"
-            )
-            if response.status_code == 404:
-                self.console.print("[dim]Existing manifest not found; starting fresh.[/dim]")
-                return None
-            response.raise_for_status()
-            data = response.json()
-            if not isinstance(data, dict):
-                self.console.print("[yellow]⚠️  Existing manifest response is not a JSON object.[/yellow]")
-                return None
-            items = data.get("items", [])
-            count = len(items) if isinstance(items, list) else 0
-            self.console.print(f"[dim]Fetched existing manifest items: {count}[/dim]")
-            return data
-        except Exception as e:
-            self.console.print(
-                f"[yellow]⚠️  Failed to fetch existing manifest from {manifest_url}: {e}[/yellow]"
-            )
-            return None

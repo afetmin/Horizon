@@ -40,6 +40,21 @@ jobs:
             fi
           fi
 
+      - name: Restore existing mobile feed manifest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HORIZON_MOBILE_FEED_TAG: mobile-feed
+        run: |
+          mkdir -p data/mobile_feed
+          if gh release view "$HORIZON_MOBILE_FEED_TAG" >/dev/null 2>&1; then
+            gh release download "$HORIZON_MOBILE_FEED_TAG" \
+              --pattern manifest.json \
+              --dir data/mobile_feed || true
+            if [ -f data/mobile_feed/manifest.json ]; then
+              mv data/mobile_feed/manifest.json data/mobile_feed/existing-manifest.json
+            fi
+          fi
+
       - name: Run Horizon
         env:
           # Map secrets to environment variables expected by config.json
@@ -49,8 +64,31 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           LWN_KEY: ${{ secrets.LWN_KEY }}
           HORIZON_PUBLIC_BASE_URL: ${{ vars.HORIZON_PUBLIC_BASE_URL }}
+          HORIZON_MOBILE_FEED_REPOSITORY: ${{ github.repository }}
+          HORIZON_MOBILE_FEED_TAG: mobile-feed
           HORIZON_GENERATE_PLACEHOLDER_SUMMARY: "1"
         run: uv run horizon --hours 48
+
+      - name: Publish mobile feed assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HORIZON_MOBILE_FEED_TAG: mobile-feed
+        run: |
+          if ! gh release view "$HORIZON_MOBILE_FEED_TAG" >/dev/null 2>&1; then
+            gh release create "$HORIZON_MOBILE_FEED_TAG" \
+              --title "Horizon Mobile Feed" \
+              --notes "Static assets for the Horizon mobile app."
+          fi
+
+          today="$(date -u +%Y-%m-%d)"
+          assets=("data/mobile_feed/manifest.json")
+          for path in "docs/_posts/${today}-summary-zh.md" "docs/_posts/${today}-summary-en.md"; do
+            if [ -f "$path" ]; then
+              assets+=("$path")
+            fi
+          done
+
+          gh release upload "$HORIZON_MOBILE_FEED_TAG" "${assets[@]}" --clobber
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
