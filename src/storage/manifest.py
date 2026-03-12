@@ -118,6 +118,45 @@ def _build_release_asset_url(repository: str, release_tag: str, filename: str) -
     return f"https://github.com/{repository}/releases/download/{release_tag}/{filename}"
 
 
+def build_mobile_cdn_manifest(
+    posts_dir: Path,
+    repository: str,
+    git_ref: str = "gh-pages",
+    generated_at: datetime | None = None,
+) -> dict:
+    """Build a mobile manifest that points to GitHub repo files via jsDelivr."""
+    now = generated_at or datetime.now(timezone.utc)
+    repository_name = repository.strip().strip("/")
+    ref_name = git_ref.strip() or "gh-pages"
+
+    items = []
+    for path, date, lang, title in _iter_post_metadata(posts_dir):
+        items.append(
+            {
+                "id": f"{date}-{lang}",
+                "date": date,
+                "lang": lang,
+                "title": title,
+                "url": _build_github_cdn_url(repository_name, ref_name, f"_posts/{path.name}"),
+            }
+        )
+
+    items.sort(key=lambda x: (x["date"], x["lang"]), reverse=True)
+    return {
+        "version": "3",
+        "generated_at": now.isoformat().replace("+00:00", "Z"),
+        "source": "github-cdn",
+        "repository": repository_name,
+        "git_ref": ref_name,
+        "items": items,
+    }
+
+
+def _build_github_cdn_url(repository: str, git_ref: str, file_path: str) -> str:
+    normalized_path = file_path.strip().lstrip("/")
+    return f"https://cdn.jsdelivr.net/gh/{repository}@{git_ref}/{normalized_path}"
+
+
 def merge_manifest_items(current_manifest: dict, existing_manifest: dict | None) -> dict:
     """Merge current manifest items with an existing manifest, preferring current items."""
     merged_by_id = {}

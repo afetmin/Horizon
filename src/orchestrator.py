@@ -22,13 +22,7 @@ from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
-from .storage.manifest import (
-    build_manifest,
-    build_release_manifest,
-    merge_release_manifest_items,
-    read_manifest,
-    write_manifest,
-)
+from .storage.manifest import build_manifest, build_mobile_cdn_manifest, write_manifest
 
 
 class HorizonOrchestrator:
@@ -68,6 +62,7 @@ class HorizonOrchestrator:
             self.console.print(f"📥 Fetched {len(all_items)} items from all sources\n")
 
             if not all_items:
+                self._update_mobile_manifest()
                 self.console.print("[yellow]No new content found. Exiting.[/yellow]")
                 return
 
@@ -490,16 +485,13 @@ class HorizonOrchestrator:
                 )
                 return
 
-            release_tag = os.getenv("HORIZON_MOBILE_FEED_TAG", "mobile-feed").strip() or "mobile-feed"
-            existing_manifest_path = Path("data/mobile_feed/existing-manifest.json")
-            existing_manifest = read_manifest(existing_manifest_path)
-            mobile_manifest = build_release_manifest(
+            git_ref = os.getenv("HORIZON_MOBILE_FEED_REF", "gh-pages").strip() or "gh-pages"
+            mobile_manifest = build_mobile_cdn_manifest(
                 posts_dir=posts_dir,
                 repository=repository,
-                release_tag=release_tag,
+                git_ref=git_ref,
             )
-            mobile_manifest = merge_release_manifest_items(mobile_manifest, existing_manifest)
-            mobile_output_path = Path("data/mobile_feed/manifest.json")
+            mobile_output_path = Path("docs/api/mobile-manifest.json")
             write_manifest(mobile_manifest, mobile_output_path)
             self.console.print(
                 f"📱 Saved mobile feed manifest to: {mobile_output_path} ({len(mobile_manifest['items'])} items)\n"

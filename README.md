@@ -150,40 +150,39 @@ Horizon works great as a **GitHub Actions** cron job. See [`.github/workflows/da
 
 ### 5. Mobile Feed (for Flutter app)
 
-Horizon now publishes mobile data to a dedicated GitHub Release tag, `mobile-feed`, instead of using GitHub Pages as the app data source.
+Horizon publishes a mobile-facing manifest alongside the static site on the `gh-pages` branch. The Flutter app reads that manifest through GitHub-backed CDNs instead of GitHub Release assets.
 
 - `docs/api/manifest.json`: site-facing manifest for GitHub Pages
-- `data/mobile_feed/manifest.json`: mobile manifest generated locally and uploaded to the release
-- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`: generated digest body, also uploaded as release assets
+- `docs/api/mobile-manifest.json`: mobile-facing manifest published to `gh-pages`
+- `docs/_posts/YYYY-MM-DD-summary-{lang}.md`: generated digest body published to `gh-pages`
 
 The mobile flow is:
 
 1. The app stores one fixed manifest URL
 2. It loads the manifest and gets the full history list
-3. Each `item.url` points to a GitHub Release asset for that digest body
-4. The app fetches the markdown body from that URL
+3. Each `item.url` points to a GitHub repository file path exposed through jsDelivr
+4. The app fetches the markdown body from that URL, and falls back to jsdmirror if the default CDN request fails
 
 Each scheduled workflow run does the following:
 
-1. Download the existing `manifest.json` from the `mobile-feed` release
+1. Restore the existing summaries and manifests from `gh-pages`
 2. Run Horizon and generate today’s digests
-3. Merge the existing history into the new manifest
-4. Upload today’s digest assets first
-5. Upload the new `manifest.json` last
+3. Regenerate `docs/api/manifest.json` and `docs/api/mobile-manifest.json`
+4. Publish the updated `docs/` directory back to `gh-pages`
 
 Required workflow environment variables:
 
 ```bash
 HORIZON_PUBLIC_BASE_URL=https://<your-github-pages-domain>
 HORIZON_MOBILE_FEED_REPOSITORY=<owner>/<repo>
-HORIZON_MOBILE_FEED_TAG=mobile-feed
+HORIZON_MOBILE_FEED_REF=gh-pages
 ```
 
 Example mobile startup command:
 
 ```bash
 cd mobile/horizon_mobile
-flutter run --dart-define=MANIFEST_URL=https://github.com/<owner>/<repo>/releases/download/mobile-feed/manifest.json
+flutter run --dart-define=MANIFEST_URL=https://cdn.jsdelivr.net/gh/<owner>/<repo>@gh-pages/api/mobile-manifest.json
 ```
 
 ## Supported Sources

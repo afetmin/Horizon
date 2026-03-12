@@ -11,7 +11,7 @@ import 'widgets/manifest_url_dialog.dart';
 
 const defaultManifestUrl = String.fromEnvironment(
   'MANIFEST_URL',
-  defaultValue: 'https://github.com/afetmin/Horizon/releases/download/mobile-feed/manifest.json',
+  defaultValue: 'https://cdn.jsdelivr.net/gh/afetmin/Horizon@gh-pages/api/mobile-manifest.json',
 );
 
 void main() {
@@ -48,6 +48,7 @@ class _HomeShellState extends State<HomeShell> {
       ManifestSettingsRepository();
   late ManifestService _manifestService = ManifestService(
     manifestUrl: _manifestUrl,
+    enableCdnFallback: _manifestUrl == defaultManifestUrl,
   );
 
   int _tabIndex = 0;
@@ -149,7 +150,10 @@ class _HomeShellState extends State<HomeShell> {
     setState(() {
       if (savedManifestUrl != null) {
         _manifestUrl = savedManifestUrl;
-        _manifestService = ManifestService(manifestUrl: _manifestUrl);
+        _manifestService = ManifestService(
+          manifestUrl: _manifestUrl,
+          enableCdnFallback: _manifestUrl == defaultManifestUrl,
+        );
       }
     });
   }
@@ -169,7 +173,10 @@ class _HomeShellState extends State<HomeShell> {
     }
     setState(() {
       _manifestUrl = result;
-      _manifestService = ManifestService(manifestUrl: _manifestUrl);
+      _manifestService = ManifestService(
+        manifestUrl: _manifestUrl,
+        enableCdnFallback: _manifestUrl == defaultManifestUrl,
+      );
       _manifestVersion += 1;
     });
   }
