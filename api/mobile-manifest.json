@@ -1,10 +1,24 @@
 {
   "version": "3",
-  "generated_at": "2026-05-02T02:25:59.116213Z",
+  "generated_at": "2026-05-03T02:34:19.628193Z",
   "source": "github-cdn",
   "repository": "afetmin/Horizon",
   "git_ref": "gh-pages",
   "items": [
+    {
+      "id": "2026-05-03-zh",
+      "date": "2026-05-03",
+      "lang": "zh",
+      "title": "Horizon Summary: 2026-05-03 (ZH)",
+      "url": "https://cdn.jsdelivr.net/gh/afetmin/Horizon@gh-pages/_posts/2026-05-03-summary-zh.md"
+    },
+    {
+      "id": "2026-05-03-en",
+      "date": "2026-05-03",
+      "lang": "en",
+      "title": "Horizon Summary: 2026-05-03 (EN)",
+      "url": "https://cdn.jsdelivr.net/gh/afetmin/Horizon@gh-pages/_posts/2026-05-03-summary-en.md"
+    },
     {
       "id": "2026-05-02-zh",
       "date": "2026-05-02",
